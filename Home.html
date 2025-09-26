@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BONDMAXX - الدهانات والألوان</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+       
+    </style>
+</head>
+<body>
+ 
+    <!-- Header -->
+<header class="header">
+    <div class="header-container">
+        
+        <!-- Right side - Menu button -->
+        <div class="header-right">
+            <button class="menu-btn" onclick="toggleSidebar()">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+        </div>
+
+        <!-- Logo - Center -->
+        <div class="header-center">
+            <img src="img/logo.png" 
+                 alt="BONDMAXX Painting" 
+                 class="logo" 
+                 onclick="showHomePage()">
+        </div>
+
+        <!-- Left side buttons -->
+        <div class="header-left">
+
+
+
+            
+            <!-- Favorites button -->
+            <button class="btn btn-heart" onclick="toggleFavorites()">
+                <i class="fas fa-heart"></i>
+                <span>المفضلة</span>
+            </button>
+
+            <!-- Language selector -->
+            <div class="language-dropdown">
+                <button class="btn" onclick="toggleLanguageMenu()">
+                    <img src="https://flagcdn.com/w20/sa.png" alt="العربية" class="flag" id="currentFlag">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLanguage">العربية</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                
+                <div class="language-menu" id="languageMenu">
+                    <div class="language-item" onclick="selectLanguage('ar', 'العربية', 'https://flagcdn.com/w20/sa.png')">
+                        <img src="https://flagcdn.com/w20/sa.png" alt="العربية" class="flag">
+                        <span>العربية</span>
+                    </div>
+                    <div class="language-item" onclick="selectLanguage('tr', 'Türkçe', 'https://flagcdn.com/w20/tr.png')">
+                        <img src="https://flagcdn.com/w20/tr.png" alt="Türkçe" class="flag">
+                        <span>Türkçe</span>
+                    </div>
+                    <div class="language-item" onclick="selectLanguage('en', 'English', 'https://flagcdn.com/w20/us.png')">
+                        <img src="https://flagcdn.com/w20/us.png" alt="English" class="flag">
+                        <span>English</span>
+                    </div>
+                    <div class="language-item" onclick="selectLanguage('de', 'Deutsch', 'https://flagcdn.com/w20/de.png')">
+                        <img src="https://flagcdn.com/w20/de.png" alt="Deutsch" class="flag">
+                        <span>Deutsch</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+<!-- Sidebar Menu -->
+
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <img src="img/logo.png" alt="BONDMAXX" class="sidebar-logo">
+        <button class="sidebar-close" onclick="closeSidebar()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div class="sidebar-content simple-menu">
+        <div class="sidebar-item">الداخلية</div>
+        <div class="sidebar-item">الخارجية</div>
+        <div class="sidebar-item">الألوان</div>
+        <div class="sidebar-item">مجموعة الألوان</div>
+        <div class="sidebar-item">أحجز خدمات الدهان</div>
+        <div class="sidebar-item">البحث عن تاجر</div>
+    </div>
+</div>
+
+    <!-- Favorites Sidebar -->
+    <div class="favorites-sidebar" id="favoritesSidebar">
+        <div class="favorites-header">
+            <div class="favorites-title">
+                <i class="fas fa-heart"></i>
+                <span>الألوان المفضلة</span>
+            </div>
+            <button class="favorites-close" onclick="closeFavorites()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-content">
+            <div id="favoritesContent">
+                <div style="text-align: center; color: #6b7280; padding: 48px 28px;">
+                    <i class="fas fa-heart" style="font-size: 3rem; color: #fca5a5; margin-bottom: 16px;"></i>
+                    <h3 style="color: #374151; margin-bottom: 8px;">لا توجد ألوان مفضلة</h3>
+                    <p>ابدأ بإضافة الألوان التي تعجبك إلى قائمة المفضلة</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <div id="homePage">
+            <!-- Hero Section -->
+            <!-- Hero Section -->
+<section class="hero" style="background: url('img/foto.jpeg') no-repeat center center/cover;">
+    <div class="hero-container">
+        <h1>مرحباً بكم في عالم BONDMAXX</h1>
+        <p>اكتشف مجموعة استثنائية من الألوان والدهانات عالية الجودة. نحن نقدم حلولاً مبتكرة ومتطورة لجميع احتياجاتك في الطلاء والديكور، مع ضمان الجودة والأناقة في كل تفصيل.</p>
+        <a href="#" class="hero-btn" onclick="showColorsPage()">
+            <i class="fas fa-palette" style="margin-left: 8px;"></i>
+            اكتشف جميع الألوان
+        </a>
+    </div>
+</section>
+
+
+            <!-- Color Collection Section -->
+            <section class="color-collection">
+                <div class="section-container">
+                    <div class="section-title">
+                        <h2>مجموعة ألوان BONDMAXX الجديدة - تناغم 2025</h2>
+                        <p>تحتفي مجموعة ألوان BONDMAXX لموسم 2025، المسماة "تناغم"، بتأثير الظلال الخفية والانسجام المثالي. تضم المجموعة أكثر من 360 لونًا موزعة على ست فئات لونية رئيسية، كل منها مصممة بعناية لتلبي أرقى المعايير الجمالية والوظيفية.</p>
+                    </div>
+
+                    <div class="color-grid">
+                        <div class="color-card">
+                            <h3>الأزرق الملكي</h3>
+                            <div class="color-swatches">
+                                <div class="color-swatch" style="background-color: #E8F2FF;" title="أزرق فاتح جداً - #E8F2FF">
+                                    <button class="heart-btn" onclick="toggleFavorite('blue-1', '#E8F2FF', 'أزرق فاتح جداً')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #B8D9FF;" title="أزرق فاتح - #B8D9FF">
+                                    <button class="heart-btn" onclick="toggleFavorite('blue-2', '#B8D9FF', 'أزرق فاتح')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #7FB8FF;" title="أزرق متوسط - #7FB8FF">
+                                    <button class="heart-btn" onclick="toggleFavorite('blue-3', '#7FB8FF', 'أزرق متوسط')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #2450A5;" title="أزرق غامق - #2450A5">
+                                    <button class="heart-btn" onclick="toggleFavorite('blue-4', '#2450A5', 'أزرق غامق')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #1A3D7A;" title="أزرق داكن - #1A3D7A">
+                                    <button class="heart-btn" onclick="toggleFavorite('blue-5', '#1A3D7A', 'أزرق داكن')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="explore-btn">
+                                <button><i class="fas fa-arrow-left" style="margin-left: 8px;"></i>استكشف المزيد</button>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <h3>البرتقالي الذهبي</h3>
+                            <div class="color-swatches">
+                                <div class="color-swatch" style="background-color: #FFF4E6;" title="برتقالي فاتح جداً - #FFF4E6">
+                                    <button class="heart-btn" onclick="toggleFavorite('orange-1', '#FFF4E6', 'برتقالي فاتح جداً')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #FFE4B3;" title="برتقالي فاتح - #FFE4B3">
+                                    <button class="heart-btn" onclick="toggleFavorite('orange-2', '#FFE4B3', 'برتقالي فاتح')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #FFD080;" title="برتقالي متوسط - #FFD080">
+                                    <button class="heart-btn" onclick="toggleFavorite('orange-3', '#FFD080', 'برتقالي متوسط')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #F39200;" title="برتقالي غامق - #F39200">
+                                    <button class="heart-btn" onclick="toggleFavorite('orange-4', '#F39200', 'برتقالي غامق')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #E6732A;" title="برتقالي داكن - #E6732A">
+                                    <button class="heart-btn" onclick="toggleFavorite('orange-5', '#E6732A', 'برتقالي داكن')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="explore-btn">
+                                <button><i class="fas fa-arrow-left" style="margin-left: 8px;"></i>استكشف المزيد</button>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <h3>الأحمر الملكي</h3>
+                            <div class="color-swatches">
+                                <div class="color-swatch" style="background-color: #FFE6E6;" title="أحمر فاتح جداً - #FFE6E6">
+                                    <button class="heart-btn" onclick="toggleFavorite('red-1', '#FFE6E6', 'أحمر فاتح جداً')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #FFB3B3;" title="أحمر فاتح - #FFB3B3">
+                                    <button class="heart-btn" onclick="toggleFavorite('red-2', '#FFB3B3', 'أحمر فاتح')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #FF8080;" title="أحمر متوسط - #FF8080">
+                                    <button class="heart-btn" onclick="toggleFavorite('red-3', '#FF8080', 'أحمر متوسط')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #E00025;" title="أحمر غامق - #E00025">
+                                    <button class="heart-btn" onclick="toggleFavorite('red-4', '#E00025', 'أحمر غامق')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #B8001D;" title="أحمر داكن - #B8001D">
+                                    <button class="heart-btn" onclick="toggleFavorite('red-5', '#B8001D', 'أحمر داكن')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="explore-btn">
+                                <button><i class="fas fa-arrow-left" style="margin-left: 8px;"></i>استكشف المزيد</button>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <h3>الأصفر الشمسي</h3>
+                            <div class="color-swatches">
+                                <div class="color-swatch" style="background-color: #FFFACD;" title="أصفر فاتح جداً - #FFFACD">
+                                    <button class="heart-btn" onclick="toggleFavorite('yellow-1', '#FFFACD', 'أصفر فاتح جداً')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #FFF68F;" title="أصفر فاتح - #FFF68F">
+                                    <button class="heart-btn" onclick="toggleFavorite('yellow-2', '#FFF68F', 'أصفر فاتح')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #FFE135;" title="أصفر متوسط - #FFE135">
+                                    <button class="heart-btn" onclick="toggleFavorite('yellow-3', '#FFE135', 'أصفر متوسط')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #FEE880;" title="أصفر غامق - #FEE880">
+                                    <button class="heart-btn" onclick="toggleFavorite('yellow-4', '#FEE880', 'أصفر غامق')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #DAA520;" title="أصفر داكن - #DAA520">
+                                    <button class="heart-btn" onclick="toggleFavorite('yellow-5', '#DAA520', 'أصفر داكن')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="explore-btn">
+                                <button><i class="fas fa-arrow-left" style="margin-left: 8px;"></i>استكشف المزيد</button>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <h3>السماوي الكريستالي</h3>
+                            <div class="color-swatches">
+                                <div class="color-swatch" style="background-color: #E6F9FF;" title="سماوي فاتح جداً - #E6F9FF">
+                                    <button class="heart-btn" onclick="toggleFavorite('cyan-1', '#E6F9FF', 'سماوي فاتح جداً')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #B3F0FF;" title="سماوي فاتح - #B3F0FF">
+                                    <button class="heart-btn" onclick="toggleFavorite('cyan-2', '#B3F0FF', 'سماوي فاتح')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #80E7FF;" title="سماوي متوسط - #80E7FF">
+                                    <button class="heart-btn" onclick="toggleFavorite('cyan-3', '#80E7FF', 'سماوي متوسط')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #00AEEF;" title="سماوي غامق - #00AEEF">
+                                    <button class="heart-btn" onclick="toggleFavorite('cyan-4', '#00AEEF', 'سماوي غامق')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #0088CC;" title="سماوي داكن - #0088CC">
+                                    <button class="heart-btn" onclick="toggleFavorite('cyan-5', '#0088CC', 'سماوي داكن')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="explore-btn">
+                                <button><i class="fas fa-arrow-left" style="margin-left: 8px;"></i>استكشف المزيد</button>
+                            </div>
+                        </div>
+
+                        <div class="color-card">
+                            <h3>الأخضر الطبيعي</h3>
+                            <div class="color-swatches">
+                                <div class="color-swatch" style="background-color: #F0F8E8;" title="أخضر فاتح جداً - #F0F8E8">
+                                    <button class="heart-btn" onclick="toggleFavorite('green-1', '#F0F8E8', 'أخضر فاتح جداً')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #C8E6C9;" title="أخضر فاتح - #C8E6C9">
+                                    <button class="heart-btn" onclick="toggleFavorite('green-2', '#C8E6C9', 'أخضر فاتح')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #A5D6A7;" title="أخضر متوسط - #A5D6A7">
+                                    <button class="heart-btn" onclick="toggleFavorite('green-3', '#A5D6A7', 'أخضر متوسط')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #66BB6A;" title="أخضر غامق - #66BB6A">
+                                    <button class="heart-btn" onclick="toggleFavorite('green-4', '#66BB6A', 'أخضر غامق')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                                <div class="color-swatch" style="background-color: #388E3C;" title="أخضر داكن - #388E3C">
+                                    <button class="heart-btn" onclick="toggleFavorite('green-5', '#388E3C', 'أخضر داكن')">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="explore-btn">
+                                <button><i class="fas fa-arrow-left" style="margin-left: 8px;"></i>استكشف المزيد</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4" style="margin-top: 60px;">
+                        <a href="#" class="hero-btn" onclick="showColorsPage()">
+                            <i class="fas fa-palette" style="margin-left: 8px;"></i>
+                            استكشف جميع الألوان (360+ لون)
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Industries Section -->
+            <section class="industries">
+                <div class="section-container">
+                    <div class="section-title">
+                        <h2>الصناعات التي نخدمها</h2>
+                        <p>نقدم حلول الطلاء المتخصصة والمبتكرة لمختلف الصناعات والقطاعات، مع ضمان أعلى معايير الجودة والأداء</p>
+                    </div>
+
+                    <div class="industries-grid">
+                        <div class="industry-card">
+                            <i class="fas fa-home"></i>
+                            <h3>القطاع السكني</h3>
+                            <p>حلول طلاء متطورة للمنازل والشقق والفيلات مع ضمان الجودة والأناقة</p>
+                        </div>
+                        <div class="industry-card">
+                            <i class="fas fa-building"></i>
+                            <h3>القطاع التجاري</h3>
+                            <p>طلاء المباني التجارية والمكاتب والمراكز التسويقية بأحدث التقنيات</p>
+                        </div>
+                        <div class="industry-card">
+                            <i class="fas fa-industry"></i>
+                            <h3>القطاع الصناعي</h3>
+                            <p>حلول طلاء متخصصة للمنشآت الصناعية والمصانع مقاومة للظروف القاسية</p>
+                        </div>
+                        <div class="industry-card">
+                            <i class="fas fa-ship"></i>
+                            <h3>القطاع البحري</h3>
+                            <p>طلاء السفن والمنشآت البحرية بتقنيات مقاومة للتآكل والمياه المالحة</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- All Colors Page -->
+        <div id="allColorsPage" class="all-colors-page">
+            <div class="colors-header">
+                <div class="colors-header-content">
+                    <a href="#" class="back-btn" onclick="showHomePage()">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>العودة للرئيسية</span>
+                    </a>
+                    <div class="colors-title">
+                        <i class="fas fa-palette" style="color: #2563eb; font-size: 2.5rem;"></i>
+                        <h1>مجموعة ألوان BONDMAXX الكاملة</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-container" style="padding-top: 40px;">
+                <div class="colors-filters">
+                    <div class="filters-row">
+                        <div class="search-box">
+                            <input type="text" class="search-input" placeholder="ابحث عن عائلة لون أو رمز..." id="colorSearch" oninput="filterColors()">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                        <select class="category-select" id="categoryFilter" onchange="filterColors()">
+                            <option value="all">جميع الفئات اللونية</option>
+                            <option value="blues">الأزرق وتدرجاته</option>
+                            <option value="reds">الأحمر وتدرجاته</option>
+                            <option value="greens">الأخضر وتدرجاته</option>
+                            <option value="yellows">الأصفر وتدرجاته</option>
+                            <option value="purples">البنفسجي وتدرجاته</option>
+                            <option value="oranges">البرتقالي وتدرجاته</option>
+                        </select>
+                    </div>
+                    <div class="results-count" id="resultsCount">
+                        عدد عائلات الألوان: 72 عائلة (360 لون إجمالي)
+                    </div>
+                </div>
+
+                <div class="color-families-grid" id="colorFamiliesGrid">
+                    <!-- Color families will be populated by JavaScript -->
+                </div>
+
+                <div class="no-results hidden" id="noResults">
+                    <i class="fas fa-palette"></i>
+                    <h3>لم يتم العثور على عائلات ألوان مطابقة</h3>
+                    <p>جرب تغيير مصطلح البحث أو اختيار فئة لونية مختلفة</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BONDMAXX</h3>
+                <p style="color: #d1d5db; margin-bottom: 20px; line-height: 1.6;">شركة رائدة في مجال الدهانات والألوان عالية الجودة، نقدم حلولاً مبتكرة ومتطورة لجميع احتياجاتكم في الطلاء والديكور.</p>
+                <div class="social-icons">
+                    <div class="social-icon"><i class="fab fa-facebook-f"></i></div>
+                    <div class="social-icon"><i class="fab fa-twitter"></i></div>
+                    <div class="social-icon"><i class="fab fa-instagram"></i></div>
+                    <div class="social-icon"><i class="fab fa-linkedin-in"></i></div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>المنتجات</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i>الدهانات الداخلية</a></li>
+                    <li><a href="#"><i class="fas fa-building"></i>الدهانات الخارجية</a></li>
+                    <li><a href="#"><i class="fas fa-industry"></i>الدهانات الصناعية</a></li>
+                    <li><a href="#"><i class="fas fa-ship"></i>الدهانات البحرية</a></li>
+                    <li><a href="#"><i class="fas fa-palette"></i>مجموعة الألوان</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>الخدمات</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-comments"></i>استشارة الألوان</a></li>
+                    <li><a href="#"><i class="fas fa-chalkboard-teacher"></i>التدريب التقني</a></li>
+                    <li><a href="#"><i class="fas fa-tools"></i>الدعم الفني</a></li>
+                    <li><a href="#"><i class="fas fa-certificate"></i>ضمان الجودة</a></li>
+                    <li><a href="#"><i class="fas fa-search"></i>البحث عن تاجر</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <ul>
+                    <li><a href="tel:+966111234567"><i class="fas fa-phone"></i>+90 555 000 40 00</a></li>
+                    <li><a href="mailto:info@bondmaxx.com"><i class="fas fa-envelope"></i>info@bondmaxx.com</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i>سوريا ادلب</a></li>
+                    <li><a href="#"><i class="fas fa-clock"></i>الأحد - الخميس: 8:00 ص - 6:00 م</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BONDMAXX. جميع الحقوق محفوظة. | تصميم وتطوير بواسطة فريق BONDMAXX التقني</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
