@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BONDMAXX - الدهانات والألوان</title>
+          <script src="js/script.js"></script>
+   <link href="css/style.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md border-b border-gray-200">
+        <div class="max-w-[1400px] mx-auto px-6 flex justify-between items-center h-[70px] relative">
+
+            <!-- Right - Menu -->
+            <div class="flex items-center">
+                <button title="button" type="button" class="p-3 text-gray-700 hover:text-blue-600 hover:scale-110 transition" onclick="toggleSidebar()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Center - Logo -->
+            <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <img alt=""  src="img/logo.png" alt="BONDMAXX Painting" class="h-24 cursor-pointer filter drop-shadow-md hover:opacity-80 hover:scale-105 transition" onclick="showHomePage()">
+            </div>
+
+            <!-- Left - Favorites + Language -->
+            <div class="flex items-center gap-5">
+                <!-- Favorites -->
+                <button title="button" type="button" class="flex items-center gap-2 p-2 rounded-md hover:bg-red-100 hover:text-red-600 transition" onclick="toggleFavorites()">
+                    <i class="fas fa-heart"></i>
+                    <span class="hidden md:inline">المفضلة</span>
+                </button>
+
+                <!-- Language -->
+                <div class="relative">
+                    <button title="button" type="button" class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 transition" onclick="toggleLanguageMenu()">
+                        <img alt=""  src="https://flagcdn.com/w20/sa.png" alt="العربية" class="w-6 rounded shadow-sm" id="currentFlag">
+                        <span id="currentLanguage" class="hidden md:inline">العربية</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-52 bg-white border border-gray-200 rounded-xl shadow-lg hidden" id="languageMenu">
+                        <div class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50" onclick="selectLanguage('ar', 'العربية', 'https://flagcdn.com/w20/sa.png')">
+                            <img alt=""  src="https://flagcdn.com/w20/sa.png" class="w-6 rounded">
+                            <span>العربية</span>
+                        </div>
+                        <div class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50" onclick="selectLanguage('tr', 'Türkçe', 'https://flagcdn.com/w20/tr.png')">
+                            <img alt=""  src="https://flagcdn.com/w20/tr.png" class="w-6 rounded">
+                            <span>Türkçe</span>
+                        </div>
+                        <div class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50" onclick="selectLanguage('en', 'English', 'https://flagcdn.com/w20/us.png')">
+                            <img alt=""  src="https://flagcdn.com/w20/us.png" class="w-6 rounded">
+                            <span>English</span>
+                        </div>
+                        <div class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50" onclick="selectLanguage('de', 'Deutsch', 'https://flagcdn.com/w20/de.png')">
+                            <img alt=""  src="https://flagcdn.com/w20/de.png" class="w-6 rounded">
+                            <span>Deutsch</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="fixed inset-0 z-40 hidden bg-black/30" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="fixed top-0 right-0 h-full w-80 bg-gradient-to-br from-white to-gray-100 z-50 shadow-xl transform translate-x-full transition-transform" id="sidebar">
+        <div class="flex justify-between items-center p-6 bg-blue-600 text-white">
+            <img alt=""  src="img/logo.png" class="h-10 filter invert" alt="BONDMAXX">
+            <button title="button" type="button" class="p-2 rounded-md bg-white/20 hover:bg-white/30 transition" onclick="closeSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex flex-col py-8">
+            <a href="interior-colors.html" class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition">الداخلية</a>
+            <a href="exterior-colors.html" class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition">الخارجية</a>
+            <a href="colors.html" class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition">الألوان</a>
+            <a href="color-collection.html" class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition">مجموعة الألوان</a>
+            <a href="painting-services.html" class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition">أحجز خدمات الدهان</a>
+            <a href="find-a-dealer.html" class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition">البحث عن تاجر</a>
+        </div>
+    </div>
+
+
+<!-- Favorites Sidebar -->
+<div id="favoritesSidebar" class="fixed top-0 left-0 h-full w-80 bg-white shadow-xl -translate-x-full">
+    <button title="button" type="button" onclick="closeFavorites()">X</button>
+    <div id="favoritesContent" class="p-4"></div>
+</div>
+
+<!-- Main -->
+<main class="mt-[70px]">
+      <div id="homePage">
+       
+            <!-- Hero Section -->
+<div id="homePage">
+    <!-- Hero Section -->
+    <section class="relative h-[90vh] flex items-center justify-center text-center text-white"
+             style="background: url('img/foto.jpeg') no-repeat center center/cover;">
+        
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/50"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-2xl px-6">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                مرحباً بكم في عالم BONDMAXX
+            </h1>
+            <p class="text-lg md:text-xl mb-8 leading-relaxed">
+                اكتشف مجموعة استثنائية من الألوان والدهانات عالية الجودة. نحن نقدم حلولاً مبتكرة ومتطورة لجميع احتياجاتك 
+                في الطلاء والديكور، مع ضمان الجودة والأناقة في كل تفصيل.
+            </p>
+            <a href="#"
+               onclick="showColorsPage()"
+               class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full shadow-lg transition text-white font-medium">
+                <i class="fas fa-palette"></i>
+                اكتشف جميع الألوان
+            </a>
+        </div>
+    </section>
+  <div class="max-w-[1400px] mx-auto px-6">
+
+    <!-- Template -->
+    <template id="carousel-template">
+      <div class="mb-12">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold carousel-title text-gray-800"></h2>
+          <a href="#" class="carousel-link text-blue-600 font-semibold hover:underline flex items-center gap-1">
+            مشاهدة الجميع <i class="fas fa-arrow-left"></i>
+          </a>
+        </div>
+        <div class="relative group">
+          <div class="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-gray-50 pointer-events-none z-10"></div>
+          <div class="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-gray-50 pointer-events-none z-10"></div>
+          <div class="flex gap-5 overflow-x-scroll scroll-smooth no-scrollbar py-4 carousel-track">
+     
+          </div>
+          <!-- Prev/Next Buttons -->
+          <button title="button" type="button" class="prev-btn absolute top-1/2 -translate-y-1/2 left-2 bg-blue-600 text-white p-3 rounded-full z-20 opacity-0 group-hover:opacity-100 transition">‹</button>
+          <button title="button" type="button" class="next-btn absolute top-1/2 -translate-y-1/2 right-2 bg-blue-600 text-white p-3 rounded-full z-20 opacity-0 group-hover:opacity-100 transition">›</button>
+        </div>
+      </div>
+    </template>
+
+    <div id="carousels-container"></div>
+  </div>
+</section>
+
+</main>
+<!-- Footer -->
+  <footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20 px-6">
+  <div class="max-w-7xl mx-auto grid gap-12 md:grid-cols-4">
+    <!-- Section 1 -->
+    <div>
+      <h3 class="text-xl font-semibold mb-5">BONDMAXX</h3>
+      <p class="text-gray-300 mb-5 leading-relaxed">
+        شركة رائدة في مجال الدهانات والألوان عالية الجودة، نقدم حلولاً مبتكرة ومتطورة لجميع احتياجاتكم في الطلاء والديكور.
+      </p>
+      <div class="flex gap-4 mt-4">
+        <div class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-lg cursor-pointer hover:bg-blue-600 transition">
+          <i class="fab fa-facebook-f"></i>
+        </div>
+        <div class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-lg cursor-pointer hover:bg-blue-400 transition">
+          <i class="fab fa-twitter"></i>
+        </div>
+        <div class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-lg cursor-pointer hover:bg-pink-500 transition">
+          <i class="fab fa-instagram"></i>
+        </div>
+        <div class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-lg cursor-pointer hover:bg-blue-700 transition">
+          <i class="fab fa-linkedin-in"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div>
+      <h3 class="text-xl font-semibold mb-5">المنتجات</h3>
+      <ul class="space-y-3">
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-home"></i>الدهانات الداخلية</a></li>
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-building"></i>الدهانات الخارجية</a></li>
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-industry"></i>الدهانات الصناعية</a></li>
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-ship"></i>الدهانات البحرية</a></li>
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-palette"></i>مجموعة الألوان</a></li>
+      </ul>
+    </div>
+
+    <!-- Section 3 -->
+    <div>
+      <h3 class="text-xl font-semibold mb-5">الخدمات</h3>
+      <ul class="space-y-3">
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-comments"></i>استشارة الألوان</a></li>
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-chalkboard-teacher"></i>التدريب التقني</a></li>
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-tools"></i>الدعم الفني</a></li>
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-certificate"></i>ضمان الجودة</a></li>
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-search"></i>البحث عن تاجر</a></li>
+      </ul>
+    </div>
+
+    <!-- Section 4 -->
+    <div>
+      <h3 class="text-xl font-semibold mb-5">تواصل معنا</h3>
+      <ul class="space-y-3">
+        <li><a href="tel:+966111234567" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-phone"></i>+90 555 000 40 00</a></li>
+        <li><a href="mailto:info@bondmaxx.com" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-envelope"></i>info@bondmaxx.com</a></li>
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-map-marker-alt"></i>سوريا ادلب</a></li>
+        <li><a href="#" class="flex items-center gap-2 text-gray-300 hover:text-white transition"><i class="fas fa-clock"></i>الأحد - الخميس: 8:00 ص - 6:00 م</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400 text-sm">
+    &copy; 2025 BONDMAXX. جميع الحقوق محفوظة. | تصميم وتطوير بواسطة فريق BONDMAXX التقني
+  </div>
+</footer>
+
+</body>
+</html>

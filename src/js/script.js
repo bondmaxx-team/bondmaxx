@@ -1,5 +1,5 @@
- // Global variables
-        let favorites = JSON.parse(localStorage.getItem('bondmaxx-favorites') || '[]');
+
+let favorites = JSON.parse(localStorage.getItem('bondmaxx-favorites') || '[]');
         let currentLanguage = 'ar';
         let colorFamilies = [];
 
@@ -92,267 +92,112 @@
             ];
         }
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeColorFamilies();
-            renderColorFamilies();
-            updateFavoritesDisplay();
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Sidebar
+    const sidebar = document.getElementById("sidebar");
+    const sidebarOverlay = document.getElementById("sidebarOverlay");
+    window.toggleSidebar = function() { sidebar.classList.toggle("translate-x-full"); sidebarOverlay.classList.toggle("hidden"); }
+    window.closeSidebar = function() { sidebar.classList.add("translate-x-full"); sidebarOverlay.classList.add("hidden"); }
+
+    // Favorites Sidebar
+    const favoritesSidebar = document.getElementById("favoritesSidebar");
+    window.toggleFavorites = function() { favoritesSidebar.classList.toggle("-translate-x-full"); }
+    window.closeFavorites = function() { favoritesSidebar.classList.add("-translate-x-full"); }
+
+    // Pages
+    window.showHomePage = function() {
+        document.getElementById("homePage").classList.remove("hidden");
+        document.getElementById("allColorsPage").classList.add("hidden");
+    }
+    window.showColorsPage = function() {
+        document.getElementById("homePage").classList.add("hidden");
+        document.getElementById("allColorsPage").classList.remove("hidden");
+    }
+
+    // Favorites
+    window.toggleFavorite = function(id, img, name) {
+        const container = document.getElementById("favoritesContent");
+        let existing = document.getElementById(id);
+        if(existing) { existing.remove(); }
+        else {
+            let item = document.createElement("div");
+            item.id = id;
+            item.className = "flex items-center gap-3 p-2 border rounded";
+            item.innerHTML = `
+                <img alt=""  src="${img}" class="w-12 h-12 object-cover rounded-md border">
+                <span>${name}</span>
+            `;
+            container.appendChild(item);
+        }
+    }
+
+    // Language Menu
+    const languageMenu = document.getElementById("languageMenu");
+    window.toggleLanguageMenu = function() { languageMenu.classList.toggle("hidden"); }
+    window.selectLanguage = function(code, name, flag) {
+        document.getElementById("currentLanguage").innerText = name;
+        document.getElementById("currentFlag").src = flag;
+        languageMenu.classList.add("hidden");
+    }
+
+    // Search Colors
+    window.filterColors = function() {
+        let input = document.getElementById("colorSearch").value.toLowerCase();
+        let cards = document.querySelectorAll(".color-card");
+        cards.forEach(card => {
+            let text = card.innerText.toLowerCase();
+            card.style.display = text.includes(input) ? "block" : "none";
+        });
+    }
+
+    // Carousels Data
+    const carouselsData = [
+        { title: "دهانات داخلية", link:"#", products:[
+            { name:"دهان أبيض داخلي", img:"https://images.unsplash.com/photo-1590689962103-97f0b7f63c43?auto=format&fit=crop&w=220&q=80" }
+        ]},
+        { title: "دهانات خارجية", link:"#", products:[
+            { name:"دهان خارجي أبيض", img:"https://images.unsplash.com/photo-1616628186608-1f5f87f87b65?auto=format&fit=crop&w=220&q=80" }
+        ]},
+        { title: "ألوان متاحة", link:"#", products:[
+            { name:"أحمر", img:"https://via.placeholder.com/220x220/ff0000/ffffff?text=Red" },
+            { name:"أزرق", img:"https://via.placeholder.com/220x220/0000ff/ffffff?text=Blue" },
+            { name:"أخضر", img:"https://via.placeholder.com/220x220/00ff00/ffffff?text=Green" }
+        ]},
+        { title: "العوازل وأنواعها", link:"#", products:[
+            { name:"عازل حراري", img:"https://via.placeholder.com/220x220/cccccc/000000?text=Insulation" }
+        ]}
+    ];
+
+    const container = document.getElementById("carousels-container");
+    const template = document.getElementById("carousel-template");
+
+    carouselsData.forEach(c => {
+        const clone = template.content.cloneNode(true);
+        clone.querySelector(".carousel-title").textContent = c.title;
+        clone.querySelector(".carousel-link").setAttribute("href", c.link);
+        const track = clone.querySelector(".carousel-track");
+
+        c.products.forEach(p => {
+            const prodDiv = document.createElement("div");
+            prodDiv.className = "min-w-[220px] bg-white rounded-xl shadow p-4 text-center relative group hover:shadow-lg transition filter hover:blur-none";
+            prodDiv.innerHTML = `
+                <img alt=""  src="${p.img}" class="w-full h-48 object-cover rounded-md mb-2">
+                <p class="text-gray-800 font-medium">${p.name}</p>
+                <button title="button" type="button" onclick="toggleFavorite('${p.name}','${p.img}','${p.name}')" class="absolute top-2 right-2 text-red-500 hover:text-red-700 text-xl">
+                    <i class="fas fa-heart"></i>
+                </button>
+            `;
+            track.appendChild(prodDiv);
         });
 
-        // Navigation functions
-        function showHomePage() {
-            document.getElementById('homePage').style.display = 'block';
-            document.getElementById('allColorsPage').style.display = 'none';
-            closeSidebar();
-        }
+        const prevBtn = clone.querySelector(".prev-btn");
+        const nextBtn = clone.querySelector(".next-btn");
+        prevBtn.addEventListener("click", ()=>{ track.scrollBy({left:-240,behavior:"smooth"}); });
+        nextBtn.addEventListener("click", ()=>{ track.scrollBy({left:240,behavior:"smooth"}); });
 
-        function showColorsPage() {
-            document.getElementById('homePage').style.display = 'none';
-            document.getElementById('allColorsPage').style.display = 'block';
-            renderColorFamilies();
-            closeSidebar();
-        }
-
-        // Sidebar functions
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            const menuIcon = document.getElementById('menuIcon');
-            
-            if (sidebar.classList.contains('active')) {
-                closeSidebar();
-            } else {
-                sidebar.classList.add('active');
-                overlay.classList.add('active');
-                menuIcon.className = 'fas fa-times';
-            }
-        }
-
-        function closeSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            const menuIcon = document.getElementById('menuIcon');
-            
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-            menuIcon.className = 'fas fa-bars';
-        }
-
-        // Favorites functions
-        function toggleFavorites() {
-            const favoritesSidebar = document.getElementById('favoritesSidebar');
-            
-            if (favoritesSidebar.classList.contains('active')) {
-                closeFavorites();
-            } else {
-                favoritesSidebar.classList.add('active');
-                updateFavoritesDisplay();
-            }
-        }
-
-        function closeFavorites() {
-            const favoritesSidebar = document.getElementById('favoritesSidebar');
-            favoritesSidebar.classList.remove('active');
-        }
-
-        function toggleFavorite(id, color, name) {
-            const existingIndex = favorites.findIndex(fav => fav.id === id);
-            
-            if (existingIndex > -1) {
-                favorites.splice(existingIndex, 1);
-            } else {
-                favorites.push({ id, color, name });
-            }
-            
-            localStorage.setItem('bondmaxx-favorites', JSON.stringify(favorites));
-            updateFavoritesDisplay();
-            updateHeartIcons();
-        }
-
-        function updateFavoritesDisplay() {
-            const favoritesContent = document.getElementById('favoritesContent');
-            
-            if (favorites.length === 0) {
-                favoritesContent.innerHTML = `
-                    <div class="favorites-empty">
-    <i class="fas fa-heart"></i>
-    <h3>لا توجد ألوان مفضلة</h3>
-    <p>ابدأ بإضافة الألوان التي تعجبك إلى قائمة المفضلة</p>
-</div>
-
-                `;
-            } else {
-                favoritesContent.innerHTML = favorites.map(fav => `
-                    <div class="favorite-item">
-                        <div class="favorite-color" style="background-color: ${fav.color};"></div>
-                        <div class="favorite-info">
-                            <div class="favorite-name">${fav.name}</div>
-                            <div class="favorite-code">${fav.color}</div>
-                        </div>
-                        <button class="favorite-remove" onclick="toggleFavorite('${fav.id}', '${fav.color}', '${fav.name}')">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                    </div>
-                `).join('');
-            }
-        }
-
-        function updateHeartIcons() {
-            document.querySelectorAll('.heart-btn').forEach(btn => {
-                const onclick = btn.getAttribute('onclick');
-                if (onclick) {
-                    const match = onclick.match(/toggleFavorite\('([^']+)'/);
-                    if (match) {
-                        const id = match[1];
-                        const isFavorite = favorites.some(fav => fav.id === id);
-                        const icon = btn.querySelector('i');
-                        icon.className = isFavorite ? 'fas fa-heart' : 'far fa-heart';
-                        icon.style.color = isFavorite ? '#ef4444' : '#6b7280';
-                    }
-                }
-            });
-        }
-
-        // Language functions
-        function toggleLanguageMenu() {
-            const languageMenu = document.getElementById('languageMenu');
-            languageMenu.classList.toggle('active');
-        }
-
-        function selectLanguage(code, name, flag) {
-            currentLanguage = code;
-            document.getElementById('currentFlag').src = flag;
-            document.getElementById('currentLanguage').textContent = name;
-            document.getElementById('languageMenu').classList.remove('active');
-        }
-
-        // Color filtering functions
-        function filterColors() {
-            const searchTerm = document.getElementById('colorSearch').value.toLowerCase();
-            const selectedCategory = document.getElementById('categoryFilter').value;
-            
-            let filteredFamilies = colorFamilies;
-            
-            if (selectedCategory !== 'all') {
-                filteredFamilies = filteredFamilies.filter(family => family.category === selectedCategory);
-            }
-            
-            if (searchTerm) {
-                filteredFamilies = filteredFamilies.filter(family => 
-                    family.name.toLowerCase().includes(searchTerm)
-                );
-            }
-            
-            renderColorFamilies(filteredFamilies);
-            updateResultsCount(filteredFamilies.length);
-        }
-
-        function renderColorFamilies(families = colorFamilies) {
-            const grid = document.getElementById('colorFamiliesGrid');
-            const noResults = document.getElementById('noResults');
-            
-            if (families.length === 0) {
-                grid.innerHTML = '';
-                noResults.classList.remove('hidden');
-            } else {
-                noResults.classList.add('hidden');
-                grid.innerHTML = families.map((family, index) => `
-                    <div class="color-family-card">
-                        <h3 class="family-title">${family.name}</h3>
-                        <div class="family-shades">
-                            ${family.shades.map((shade, shadeIndex) => `
-                                <div class="shade-swatch" style="background-color: ${shade};" title="${shade}">
-                                    <button class="heart-btn" onclick="toggleFavorite('${family.category}-${index}-${shadeIndex}', '${shade}', '${family.name} ${shadeIndex + 1}')">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div class="family-explore-btn">
-                            <button><i class="fas fa-arrow-left" style="margin-left: 8px;"></i>استكشف المزيد</button>
-                        </div>
-                    </div>
-                `).join('');
-                
-                updateHeartIcons();
-            }
-        }
-
-        function updateResultsCount(count) {
-            const resultsCount = document.getElementById('resultsCount');
-            resultsCount.textContent = `عدد عائلات الألوان: ${count} عائلة (${count * 5} لون إجمالي)`;
-        }
-
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', function(event) {
-            const languageDropdown = document.querySelector('.language-dropdown');
-            const languageMenu = document.getElementById('languageMenu');
-            
-            if (!languageDropdown.contains(event.target)) {
-                languageMenu.classList.remove('active');
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add loading states for better UX
-        function showLoading(element) {
-            element.innerHTML = '<div class="loading"></div>';
-        }
-
-        // Initialize tooltips for color swatches
-        document.addEventListener('mouseover', function(e) {
-            if (e.target.classList.contains('color-swatch') || e.target.classList.contains('shade-swatch')) {
-                const title = e.target.getAttribute('title');
-                if (title) {
-                    e.target.style.position = 'relative';
-                }
-            }
-        });
-
-
-
-
-        function openSidebar() {
-  document.querySelector(".sidebar").classList.add("active");
-}
-
-document.getElementById("menuBtn").addEventListener("click", openSidebar);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function toggleSubmenu() {
-    const submenu = document.querySelector('.sidebar-submenu');
-    submenu.classList.toggle('open');
-}
+        container.appendChild(clone);
+    });
+});
