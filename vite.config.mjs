@@ -1,13 +1,22 @@
-import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  root: 'src',
+  base: "/",
+  plugins: [tailwindcss()],
   build: {
-    outDir: '../dist',  // هذا يضع dist في جذر المشروع
-    emptyOutDir: true,  // يمسح أي محتوى قديم في dist
+    rollupOptions: {
+      input: {
+        index: "index.html",
+        aboutUs: "about-us.html",
+        colorCollection: "color-collection.html",
+        exteriorColors: "exterior-colors.html",
+        favoriteColors: "favorite-colors.html",
+        findADealer: "find-a-dealer.html",
+        insulation: "insulation.html",
+        interiorColors: "interior-colors.html",
+        paintingServices: "painting-services.html",
+      },
+    },
   },
-  plugins: [
-    tailwindcss(),
-  ],
-})
+});
