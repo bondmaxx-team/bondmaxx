@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (favoritesSidebar.classList.contains("-translate-x-full")) {
                 favoritesSidebar.classList.add("hidden");
             }
-        }, 300);
+        }, 50);
     }
 
     // Pages
