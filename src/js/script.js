@@ -1,3 +1,9 @@
+import Swiper from 'swiper/bundle';
+
+// import styles bundle
+import 'swiper/css/bundle';
+
+
 
 let favorites = JSON.parse(localStorage.getItem('bondmaxx-favorites') || '[]');
         let currentLanguage = 'ar';
@@ -239,4 +245,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
         container.appendChild(clone);
     });
+});
+
+
+function initSwiper(className) {
+  return new Swiper(`.${className}-swiper`, {
+    slidesPerView: 1,
+    spaceBetween: 16,
+    loop: false,
+    pagination: {
+      el: `.${className}-pagination`,
+      clickable: true,
+    },
+    navigation: {
+      nextEl: `.${className}-next`,
+      prevEl: `.${className}-prev`,
+    },
+    breakpoints: {
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initSwiper("interior");
+  initSwiper("exterior");
+  initSwiper("insulation");
+  initSwiper("collection");
 });
