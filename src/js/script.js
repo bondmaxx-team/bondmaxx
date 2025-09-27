@@ -104,14 +104,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Favorites Sidebar
     const favoritesSidebar = document.getElementById("favoritesSidebar");
+    const favoritesOverlay = document.getElementById("favoritesOverlay");
+
     window.toggleFavorites = function() {
         if (!favoritesSidebar) return;
         favoritesSidebar.classList.remove("hidden");
         favoritesSidebar.classList.toggle("-translate-x-full");
+        if (favoritesOverlay) {
+            favoritesOverlay.classList.remove("hidden");
+        }
     }
     window.closeFavorites = function() {
         if (!favoritesSidebar) return;
         favoritesSidebar.classList.add("-translate-x-full");
+        if (favoritesOverlay) {
+            favoritesOverlay.classList.add("hidden");
+        }
         // Hide after animation completes
         setTimeout(() => {
             if (favoritesSidebar.classList.contains("-translate-x-full")) {

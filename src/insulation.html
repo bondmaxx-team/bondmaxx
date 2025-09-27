@@ -11,7 +11,7 @@
 <body class="bg-gray-100 text-gray-800 font-sans">
 
     <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md border-b border-gray-200">
+    <header class="fixed top-0 left-0 right-0 z-40 bg-white shadow-md border-b border-gray-200">
         <div class="max-w-[1400px] mx-auto px-6 flex justify-between items-center h-[70px] relative">
 
             <!-- Right - Menu -->
@@ -68,7 +68,10 @@
     </header>
 
     <!-- Sidebar Overlay -->
-    <div class="fixed inset-0 z-40 hidden bg-black/30" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="fixed inset-0 z-40 hidden bg-black/50" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- Favorites Overlay -->
+    <div class="fixed inset-0 z-40 hidden bg-black/50" id="favoritesOverlay" onclick="closeFavorites()"></div>
 
     <!-- Sidebar -->
     <div class="fixed top-0 right-0 h-full w-80 bg-gradient-to-br from-white to-gray-100 z-50 shadow-xl transform translate-x-full transition-transform" id="sidebar">
