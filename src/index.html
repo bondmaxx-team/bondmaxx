@@ -8,6 +8,8 @@
    <link href="css/style.css" rel="stylesheet">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
 
@@ -152,29 +154,63 @@
     </section>
   <div class="max-w-[1400px] mx-auto px-6">
 
-    <!-- Template -->
-    <template id="carousel-template">
-      <div class="mb-12">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-2xl font-bold carousel-title text-gray-800"></h2>
-          <a href="#" class="carousel-link text-blue-600 font-semibold hover:underline flex items-center gap-1">
-            مشاهدة الجميع <i class="fas fa-arrow-left"></i>
-          </a>
-        </div>
-        <div class="relative group">
-          <div class="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-gray-50 pointer-events-none z-10"></div>
-          <div class="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-gray-50 pointer-events-none z-10"></div>
-          <div class="flex gap-5 overflow-x-scroll scroll-smooth no-scrollbar py-4 carousel-track">
-     
-          </div>
-          <!-- Prev/Next Buttons -->
-          <button title="button" type="button" class="prev-btn absolute top-1/2 -translate-y-1/2 left-2 bg-white border-b border-gray-200 p-3 rounded-full z-20 opacity-0 group-hover:opacity-100 transition">‹</button>
-          <button title="button" type="button" class="next-btn absolute top-1/2 -translate-y-1/2 right-2 bg-white border-b border-gray-200 p-3 rounded-full z-20 opacity-0 group-hover:opacity-100 transition">›</button>
-        </div>
-      </div>
-    </template>
+    <!-- Color Categories Sliders -->
+    <div class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
 
-    <div id="carousels-container"></div>
+        <!-- Blues Slider -->
+        <div class="mb-16">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">الألوان الزرقاء</h2>
+            <a href="#" class="text-blue-600 font-semibold hover:underline flex items-center gap-1">
+              مشاهدة الجميع <i class="fas fa-arrow-left"></i>
+            </a>
+          </div>
+          <div class="swiper blues-swiper">
+            <div class="swiper-wrapper">
+              <!-- Blues colors will be populated by JavaScript -->
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+        </div>
+
+        <!-- Reds Slider -->
+        <div class="mb-16">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">الألوان الحمراء</h2>
+            <a href="#" class="text-blue-600 font-semibold hover:underline flex items-center gap-1">
+              مشاهدة الجميع <i class="fas fa-arrow-left"></i>
+            </a>
+          </div>
+          <div class="swiper reds-swiper">
+            <div class="swiper-wrapper">
+              <!-- Reds colors will be populated by JavaScript -->
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+        </div>
+
+        <!-- Greens Slider -->
+        <div class="mb-16">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">الألوان الخضراء</h2>
+            <a href="#" class="text-blue-600 font-semibold hover:underline flex items-center gap-1">
+              مشاهدة الجميع <i class="fas fa-arrow-left"></i>
+            </a>
+          </div>
+          <div class="swiper greens-swiper">
+            <div class="swiper-wrapper">
+              <!-- Greens colors will be populated by JavaScript -->
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </section>
 
