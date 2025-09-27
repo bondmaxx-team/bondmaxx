@@ -13,7 +13,7 @@
 
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md border-b border-gray-200">
-        <div class="max-w-[1400px] mx-auto px-6 flex justify-between items-center h-[70px] relative">
+        <div class="max-w-[1400px] mx-auto px-6 flex justify-between items-center h-[70px]">
 
             <!-- Right - Menu -->
             <div class="flex items-center">
@@ -23,8 +23,10 @@
             </div>
 
             <!-- Center - Logo -->
-            <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <img alt=""  src="img/logo.png" alt="BONDMAXX Painting" class="h-24 cursor-pointer filter drop-shadow-md hover:opacity-80 hover:scale-105 transition" onclick="showHomePage()">
+            <div class="flex-1 flex justify-center">
+                <a href="index.html" class="inline-block">
+                    <img alt="BONDMAXX Painting" src="img/logo.png" class="h-16 cursor-pointer filter drop-shadow-md hover:opacity-80 hover:scale-105 transition">
+                </a>
             </div>
 
             <!-- Left - Favorites + Language -->
@@ -71,13 +73,17 @@
 
     <!-- Sidebar -->
     <div class="fixed top-0 right-0 h-full w-80 bg-gradient-to-br from-white to-gray-100 z-50 shadow-xl transform translate-x-full transition-transform" id="sidebar">
-        <div class="flex justify-between items-center p-6 bg-blue-600 text-white">
-            <img alt=""  src="img/logo.png" class="h-10 filter invert" alt="BONDMAXX">
-            <button title="button" type="button" class="p-2 rounded-md bg-white/20 hover:bg-white/30 transition" onclick="closeSidebar()">
+        <div class="flex justify-between items-center p-6 bg-white border-b border-gray-200">
+            <img alt="BONDMAXX" src="img/logo.png" class="h-10">
+            <button title="button" type="button" class="p-2 rounded-md bg-gray-100 hover:bg-gray-200 transition text-gray-700" onclick="closeSidebar()">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         <div class="flex flex-col py-8">
+            <a href="index.html" class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-2">
+                <i class="fas fa-home"></i>
+                الرئيسية
+            </a>
             <a href="interior-colors.html" class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition">الداخلية</a>
             <a href="exterior-colors.html" class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition">الخارجية</a>
             <a href="colors.html" class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition">الألوان</a>
@@ -142,8 +148,8 @@
      
           </div>
           <!-- Prev/Next Buttons -->
-          <button title="button" type="button" class="prev-btn absolute top-1/2 -translate-y-1/2 left-2 bg-blue-600 text-white p-3 rounded-full z-20 opacity-0 group-hover:opacity-100 transition">‹</button>
-          <button title="button" type="button" class="next-btn absolute top-1/2 -translate-y-1/2 right-2 bg-blue-600 text-white p-3 rounded-full z-20 opacity-0 group-hover:opacity-100 transition">›</button>
+          <button title="button" type="button" class="prev-btn absolute top-1/2 -translate-y-1/2 left-2 bg-white border-b border-gray-200 p-3 rounded-full z-20 opacity-0 group-hover:opacity-100 transition">‹</button>
+          <button title="button" type="button" class="next-btn absolute top-1/2 -translate-y-1/2 right-2 bg-white border-b border-gray-200 p-3 rounded-full z-20 opacity-0 group-hover:opacity-100 transition">›</button>
         </div>
       </div>
     </template>
