@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BONDMAXX - الألوان المفضلة</title>
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/assets/main-DPBINOBI.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-DMjOajPr.css">
+  </head>
+  <body class="bg-gray-100 text-gray-800 font-sans">
+    <!-- Header -->
+    <header
+      class="fixed top-0 left-0 right-0 z-40 bg-white shadow-md border-b border-gray-200"
+    >
+      <div
+        class="max-w-[1400px] mx-auto px-6 flex justify-between items-center h-[70px] relative"
+      >
+        <!-- Right - Menu -->
+        <div class="flex items-center">
+          <button
+            title="button"
+            type="button"
+            class="p-3 text-gray-700 hover:text-blue-600 hover:scale-110 transition"
+            onclick="toggleSidebar()"
+          >
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+
+        <!-- Center - Logo -->
+        <div class="flex-1 flex justify-center">
+          <a href="index.html" class="inline-block">
+            <img
+              alt="BONDMAXX Painting"
+              src="/assets/logo-BCcGTVa-.png"
+              class="h-20 cursor-pointer filter drop-shadow-md hover:opacity-80 hover:scale-105 transition"
+            />
+          </a>
+        </div>
+
+        <!-- Left - Favorites + Language -->
+        <div class="flex items-center gap-5">
+          <!-- Favorites -->
+          <button
+            title="button"
+            type="button"
+            class="flex items-center gap-2 p-2 rounded-md hover:bg-red-100 hover:text-red-600 transition"
+            onclick="toggleFavorites()"
+          >
+            <i class="fas fa-heart"></i>
+            <span class="hidden md:inline">المفضلة</span>
+          </button>
+
+          <!-- Language -->
+          <div class="relative">
+            <button
+              title="button"
+              type="button"
+              class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 transition"
+              onclick="toggleLanguageMenu()"
+            >
+              <img
+                alt=""
+                src="https://flagcdn.com/w20/sa.png"
+                alt="العربية"
+                class="w-6 rounded shadow-sm"
+                id="currentFlag"
+              />
+              <span id="currentLanguage" class="hidden md:inline">العربية</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div
+              class="absolute right-0 mt-2 w-52 bg-white border border-gray-200 rounded-xl shadow-lg hidden"
+              id="languageMenu"
+            >
+              <div
+                class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50"
+                onclick="selectLanguage('ar', 'العربية', 'https://flagcdn.com/w20/sa.png')"
+              >
+                <img
+                  alt=""
+                  src="https://flagcdn.com/w20/sa.png"
+                  class="w-6 rounded"
+                />
+                <span>العربية</span>
+              </div>
+              <div
+                class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50"
+                onclick="selectLanguage('tr', 'Türkçe', 'https://flagcdn.com/w20/tr.png')"
+              >
+                <img
+                  alt=""
+                  src="https://flagcdn.com/w20/tr.png"
+                  class="w-6 rounded"
+                />
+                <span>Türkçe</span>
+              </div>
+              <div
+                class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50"
+                onclick="selectLanguage('en', 'English', 'https://flagcdn.com/w20/us.png')"
+              >
+                <img
+                  alt=""
+                  src="https://flagcdn.com/w20/us.png"
+                  class="w-6 rounded"
+                />
+                <span>English</span>
+              </div>
+              <div
+                class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50"
+                onclick="selectLanguage('de', 'Deutsch', 'https://flagcdn.com/w20/de.png')"
+              >
+                <img
+                  alt=""
+                  src="https://flagcdn.com/w20/de.png"
+                  class="w-6 rounded"
+                />
+                <span>Deutsch</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div
+      class="fixed inset-0 z-40 hidden bg-black/50"
+      id="sidebarOverlay"
+      onclick="closeSidebar()"
+    ></div>
+
+    <!-- Favorites Overlay -->
+    <div
+      class="fixed inset-0 z-40 hidden bg-black/50"
+      id="favoritesOverlay"
+      onclick="closeFavorites()"
+    ></div>
+    <!-- Sidebar -->
+    <div
+      class="fixed top-0 right-0 h-full w-80 bg-gradient-to-br from-white to-gray-100 z-50 shadow-xl transform translate-x-full transition-transform"
+      id="sidebar"
+    >
+      <div
+        class="flex justify-between items-center p-6 bg-white border-b border-gray-200"
+      >
+        <img alt="" src="/assets/logo-BCcGTVa-.png" class="h-14" alt="BONDMAXX" />
+        <button
+          title="button"
+          type="button"
+          class="p-2 rounded-md bg-gray-100 hover:bg-gray-200 transition text-gray-700"
+          onclick="closeSidebar()"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="flex flex-col py-8">
+        <a
+          href="index.html"
+          class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-2"
+        >
+          <i class="fas fa-home"></i>
+          الرئيسية
+        </a>
+        <a
+          href="interior-colors.html"
+          class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition"
+          >الداخلية</a
+        >
+        <a
+          href="exterior-colors.html"
+          class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition"
+          >الخارجية</a
+        >
+        <a
+          href="insulation.html"
+          class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition"
+          >العزل</a
+        >
+        <a
+          href="color-collection.html"
+          class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition"
+          >مجموعة الألوان</a
+        >
+        <a
+          href="painting-services.html"
+          class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition"
+          >أحجز خدمات الدهان</a
+        >
+        <a
+          href="find-a-dealer.html"
+          class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition"
+          >البحث عن تاجر</a
+        >
+        <a
+          href="aboutus.html"
+          class="px-7 py-4 cursor-pointer hover:bg-blue-50 hover:text-blue-600 transition"
+          >معلومات عنا</a
+        >
+      </div>
+    </div>
+
+    <!-- Favorites Sidebar -->
+    <div
+      class="fixed top-0 left-0 h-full w-96 bg-gradient-to-br from-white to-red-50 z-50 shadow-xl overflow-y-auto transform -translate-x-full transition-transform duration-300 hidden"
+      id="favoritesSidebar"
+    >
+      <div
+        class="bg-gradient-to-r from-red-500 to-red-600 text-white p-6 border-b-2 border-red-200"
+      >
+        <div class="flex items-center gap-3 text-xl font-semibold">
+          <i class="fas fa-heart"></i>
+          <span>الألوان المفضلة</span>
+        </div>
+        <button
+          title="button"
+          type="button"
+          class="absolute top-6 left-6 p-2 rounded-md bg-white/20 hover:bg-white/30 transition text-white"
+          onclick="closeFavorites()"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="py-8">
+        <div id="favoritesContent">
+          <div style="text-align: center; color: #6b7280; padding: 48px 28px">
+            <i
+              class="fas fa-heart"
+              style="font-size: 3rem; color: #fca5a5; margin-bottom: 16px"
+            ></i>
+            <h3 style="color: #374151; margin-bottom: 8px">
+              لا توجد ألوان مفضلة
+            </h3>
+            <p>ابدأ بإضافة الألوان التي تعجبك إلى قائمة المفضلة</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- whatsapp button-->
+    <a
+      href="https://wa.me/00990555555555"
+      target="_blank"
+      title="تواصل معنا عبر واتساب"
+      class="fixed bottom-5 right-5 w-16 h-16 z-50 cursor-pointer hidden md:block animate-bounce"
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="WhatsApp"
+        class="w-full h-full rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110"
+      />
+    </a>
+
+    <!-- Footer -->
+    <footer
+      class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20 px-6"
+    >
+      <div class="max-w-7xl mx-auto grid gap-12 md:grid-cols-4">
+        <!-- Section 1 -->
+        <div>
+          <h3 class="text-xl font-semibold mb-5">BONDMAXX</h3>
+          <p class="text-gray-300 mb-5 leading-relaxed">
+            شركة رائدة في مجال الدهانات والألوان عالية الجودة، نقدم حلولاً
+            مبتكرة ومتطورة لجميع احتياجاتكم في الطلاء والديكور.
+          </p>
+          <div class="flex gap-4 mt-4">
+            <div
+              class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-lg cursor-pointer hover:bg-blue-600 transition"
+            >
+              <i class="fab fa-facebook-f"></i>
+            </div>
+            <div
+              class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-lg cursor-pointer hover:bg-blue-400 transition"
+            >
+              <i class="fab fa-twitter"></i>
+            </div>
+            <div
+              class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-lg cursor-pointer hover:bg-pink-500 transition"
+            >
+              <i class="fab fa-instagram"></i>
+            </div>
+            <div
+              class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-lg cursor-pointer hover:bg-blue-700 transition"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div>
+          <h3 class="text-xl font-semibold mb-5">المنتجات</h3>
+          <ul class="space-y-3">
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-home"></i>الدهانات الداخلية</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-building"></i>الدهانات الخارجية</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-industry"></i>الدهانات الصناعية</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-ship"></i>الدهانات البحرية</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-palette"></i>مجموعة الألوان</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 3 -->
+        <div>
+          <h3 class="text-xl font-semibold mb-5">الخدمات</h3>
+          <ul class="space-y-3">
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-comments"></i>استشارة الألوان</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-chalkboard-teacher"></i>التدريب التقني</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-tools"></i>الدعم الفني</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-certificate"></i>ضمان الجودة</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-search"></i>البحث عن تاجر</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section 4 -->
+        <div>
+          <h3 class="text-xl font-semibold mb-5">تواصل معنا</h3>
+          <ul class="space-y-3">
+            <li>
+              <a
+                href="tel:+966111234567"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-phone"></i>+90 555 000 40 00</a
+              >
+            </li>
+            <li>
+              <a
+                href="mailto:info@bondmaxx.com"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-envelope"></i>info@bondmaxx.com</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-map-marker-alt"></i>سوريا ادلب</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-gray-300 hover:text-white transition"
+                ><i class="fas fa-clock"></i>الأحد - الخميس: 8:00 ص - 6:00 م</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div
+        class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400 text-sm"
+      >
+        &copy; 2025 BONDMAXX. جميع الحقوق محفوظة. | تصميم وتطوير بواسطة فريق
+        BONDMAXX التقني
+      </div>
+    </footer>
+  </body>
+</html>
