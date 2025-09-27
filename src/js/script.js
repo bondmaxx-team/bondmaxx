@@ -104,22 +104,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Favorites Sidebar
     const favoritesSidebar = document.getElementById("favoritesSidebar");
-    window.toggleFavorites = function() { favoritesSidebar.classList.toggle("-translate-x-full"); }
-    window.closeFavorites = function() { favoritesSidebar.classList.add("-translate-x-full"); }
+    window.toggleFavorites = function() {
+        if (!favoritesSidebar) return;
+        favoritesSidebar.classList.remove("hidden");
+        favoritesSidebar.classList.toggle("-translate-x-full");
+    }
+    window.closeFavorites = function() {
+        if (!favoritesSidebar) return;
+        favoritesSidebar.classList.add("-translate-x-full");
+        // Hide after animation completes
+        setTimeout(() => {
+            if (favoritesSidebar.classList.contains("-translate-x-full")) {
+                favoritesSidebar.classList.add("hidden");
+            }
+        }, 300);
+    }
 
     // Pages
     window.showHomePage = function() {
-        document.getElementById("homePage").classList.remove("hidden");
-        document.getElementById("allColorsPage").classList.add("hidden");
+        const homePage = document.getElementById("homePage");
+        const allColorsPage = document.getElementById("allColorsPage");
+        if (homePage) homePage.classList.remove("hidden");
+        if (allColorsPage) allColorsPage.classList.add("hidden");
     }
     window.showColorsPage = function() {
-        document.getElementById("homePage").classList.add("hidden");
-        document.getElementById("allColorsPage").classList.remove("hidden");
+        const homePage = document.getElementById("homePage");
+        const allColorsPage = document.getElementById("allColorsPage");
+        if (homePage) homePage.classList.add("hidden");
+        if (allColorsPage) allColorsPage.classList.remove("hidden");
     }
 
     // Favorites
     window.toggleFavorite = function(id, img, name) {
         const container = document.getElementById("favoritesContent");
+        if (!container) return; // Exit if favorites container doesn't exist
+
         let existing = document.getElementById(id);
         if(existing) { existing.remove(); }
         else {
@@ -136,20 +155,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Language Menu
     const languageMenu = document.getElementById("languageMenu");
-    window.toggleLanguageMenu = function() { languageMenu.classList.toggle("hidden"); }
+    window.toggleLanguageMenu = function() {
+        if (languageMenu) languageMenu.classList.toggle("hidden");
+    }
     window.selectLanguage = function(code, name, flag) {
-        document.getElementById("currentLanguage").innerText = name;
-        document.getElementById("currentFlag").src = flag;
-        languageMenu.classList.add("hidden");
+        const currentLanguage = document.getElementById("currentLanguage");
+        const currentFlag = document.getElementById("currentFlag");
+        if (currentLanguage) currentLanguage.innerText = name;
+        if (currentFlag) currentFlag.src = flag;
+        if (languageMenu) languageMenu.classList.add("hidden");
     }
 
     // Search Colors
     window.filterColors = function() {
-        let input = document.getElementById("colorSearch").value.toLowerCase();
+        const input = document.getElementById("colorSearch");
+        if (!input) return; // Exit if search input doesn't exist
+
+        let inputValue = input.value.toLowerCase();
         let cards = document.querySelectorAll(".color-card");
         cards.forEach(card => {
             let text = card.innerText.toLowerCase();
-            card.style.display = text.includes(input) ? "block" : "none";
+            card.style.display = text.includes(inputValue) ? "block" : "none";
         });
     }
 
@@ -173,6 +199,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const container = document.getElementById("carousels-container");
     const template = document.getElementById("carousel-template");
+
+    // Only run carousel code if elements exist (on index.html)
+    if (!container || !template) {
+        return;
+    }
 
     carouselsData.forEach(c => {
         const clone = template.content.cloneNode(true);

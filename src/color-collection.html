@@ -101,13 +101,13 @@
     </div>
 
     <!-- Favorites Sidebar -->
-    <div class="fixed top-0 left-0 h-full w-96 bg-gradient-to-br from-white to-red-50 z-50 shadow-xl overflow-y-auto transform -translate-x-full transition-transform duration-300" id="favoritesSidebar">
+    <div class="fixed top-0 left-0 h-full w-96 bg-gradient-to-br from-white to-red-50 z-50 shadow-xl overflow-y-auto transform -translate-x-full transition-transform duration-300 hidden" id="favoritesSidebar">
         <div class="bg-gradient-to-r from-red-500 to-red-600 text-white p-6 border-b-2 border-red-200">
             <div class="flex items-center gap-3 text-xl font-semibold">
                 <i class="fas fa-heart"></i>
                 <span>الألوان المفضلة</span>
             </div>
-            <button title="button" type="button" class="p-2 rounded-md bg-gray-100 hover:bg-gray-200 transition" onclick="closeFavorites()">
+            <button title="button" type="button" class="absolute top-6 left-6 p-2 rounded-md bg-white/20 hover:bg-white/30 transition text-white" onclick="closeFavorites()">
                 <i class="fas fa-times"></i>
             </button>
         </div>
