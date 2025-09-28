@@ -9,8 +9,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/assets/main-DPBINOBI.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-DMjOajPr.css">
+    <script type="module" crossorigin src="/assets/main-BgsdFEpC.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-N1LZdXri.css">
   </head>
 
   <body class="bg-gray-100 text-gray-800 font-sans">
@@ -278,6 +278,7 @@
         </section>
         <div class="max-w-[1400px] mx-auto px-6">
           <!-- Products Sliders -->
+          <!-- Products Sliders -->
           <section class="py-16 bg-white">
             <div class="max-w-7xl mx-auto px-6 space-y-16">
               <!-- Interior Colors -->
@@ -291,41 +292,90 @@
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">لون 1</h3>
-                        <div class="w-full h-32 bg-blue-200 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('interior-1', 'أزرق داخلي فاتح', 'دهانات داخلية', '#BFDBFE')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="interior-1"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">أزرق داخلي فاتح</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #bfdbfe"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">لون 2</h3>
-                        <div class="w-full h-32 bg-blue-300 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('interior-2', 'أزرق داخلي متوسط', 'دهانات داخلية', '#93C5FD')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="interior-2"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">أزرق داخلي متوسط</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #93c5fd"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">لون 3</h3>
-                        <div class="w-full h-32 bg-blue-400 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('interior-3', 'أزرق داخلي غامق', 'دهانات داخلية', '#60A5FA')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="interior-3"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">أزرق داخلي غامق</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #60a5fa"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">لون 4</h3>
-                        <div class="w-full h-32 bg-blue-500 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('interior-4', 'أزرق داخلي عميق', 'دهانات داخلية', '#3B82F6')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="interior-4"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">أزرق داخلي عميق</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #3b82f6"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <a
                         href="interior-colors.html"
                         class="block bg-blue-600 text-white rounded-lg shadow-md p-6 text-center hover:bg-blue-700 transition"
-                        ><i class="fas fa-arrow-left mb-2 text-2xl"></i>
+                      >
+                        <i class="fas fa-arrow-left mb-2 text-2xl"></i>
                         <p>عرض جميع الداخلية</p>
                       </a>
                     </div>
@@ -359,41 +409,90 @@
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">خارجية 1</h3>
-                        <div class="w-full h-32 bg-green-200 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('exterior-1', 'أخضر خارجي فاتح', 'دهانات خارجية', '#BBF7D0')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="exterior-1"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">أخضر خارجي فاتح</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #bbf7d0"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">خارجية 2</h3>
-                        <div class="w-full h-32 bg-green-300 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('exterior-2', 'أخضر خارجي متوسط', 'دهانات خارجية', '#86EFAC')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="exterior-2"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">أخضر خارجي متوسط</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #86efac"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">خارجية 3</h3>
-                        <div class="w-full h-32 bg-green-400 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('exterior-3', 'أخضر خارجي غامق', 'دهانات خارجية', '#4ADE80')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="exterior-3"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">أخضر خارجي غامق</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #4ade80"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">خارجية 4</h3>
-                        <div class="w-full h-32 bg-green-500 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('exterior-4', 'أخضر خارجي عميق', 'دهانات خارجية', '#22C55E')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="exterior-4"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">أخضر خارجي عميق</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #22c55e"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <a
                         href="exterior-colors.html"
                         class="block bg-green-600 text-white rounded-lg shadow-md p-6 text-center hover:bg-green-700 transition"
-                        ><i class="fas fa-arrow-left mb-2 text-2xl"></i>
+                      >
+                        <i class="fas fa-arrow-left mb-2 text-2xl"></i>
                         <p>عرض جميع الخارجية</p>
                       </a>
                     </div>
@@ -425,41 +524,90 @@
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">عازل 1</h3>
-                        <div class="w-full h-32 bg-yellow-200 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('insulation-1', 'عازل حراري ذهبي', 'عوازل', '#FDE68A')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="insulation-1"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">عازل حراري ذهبي</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #fde68a"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">عازل 2</h3>
-                        <div class="w-full h-32 bg-yellow-300 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('insulation-2', 'عازل مائي أصفر', 'عوازل', '#FCD34D')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="insulation-2"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">عازل مائي أصفر</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #fcd34d"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">عازل 3</h3>
-                        <div class="w-full h-32 bg-yellow-400 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('insulation-3', 'عازل صوتي برتقالي', 'عوازل', '#FBBF24')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="insulation-3"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">عازل صوتي برتقالي</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #fbbf24"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">عازل 4</h3>
-                        <div class="w-full h-32 bg-yellow-500 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('insulation-4', 'عازل متعدد الأغراض', 'عوازل', '#F59E0B')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="insulation-4"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">عازل متعدد الأغراض</h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #f59e0b"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <a
                         href="insulation.html"
                         class="block bg-yellow-600 text-white rounded-lg shadow-md p-6 text-center hover:bg-yellow-700 transition"
-                        ><i class="fas fa-arrow-left mb-2 text-2xl"></i>
+                      >
+                        <i class="fas fa-arrow-left mb-2 text-2xl"></i>
                         <p>عرض جميع العوازل</p>
                       </a>
                     </div>
@@ -493,41 +641,98 @@
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">مجموعة 1</h3>
-                        <div class="w-full h-32 bg-purple-200 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('collection-1', 'مجموعة البنفسجي الفاتح', 'مجموعة الألوان', '#DDD6FE')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="collection-1"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">
+                          مجموعة البنفسجي الفاتح
+                        </h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #ddd6fe"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">مجموعة 2</h3>
-                        <div class="w-full h-32 bg-purple-300 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('collection-2', 'مجموعة البنفسجي المتوسط', 'مجموعة الألوان', '#C4B5FD')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="collection-2"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">
+                          مجموعة البنفسجي المتوسط
+                        </h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #c4b5fd"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">مجموعة 3</h3>
-                        <div class="w-full h-32 bg-purple-400 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('collection-3', 'مجموعة البنفسجي الغامق', 'مجموعة الألوان', '#A78BFA')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="collection-3"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">
+                          مجموعة البنفسجي الغامق
+                        </h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #a78bfa"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center"
+                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <h3 class="font-semibold mb-2">مجموعة 4</h3>
-                        <div class="w-full h-32 bg-purple-500 rounded"></div>
+                        <button
+                          onclick="toggleSliderFavorite('collection-4', 'مجموعة البنفسجي العميق', 'مجموعة الألوان', '#8B5CF6')"
+                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                        >
+                          <i
+                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                            data-fav-id="collection-4"
+                          ></i>
+                        </button>
+                        <h3 class="font-semibold mb-2">
+                          مجموعة البنفسجي العميق
+                        </h3>
+                        <div
+                          class="w-full h-32 rounded"
+                          style="background-color: #8b5cf6"
+                        ></div>
                       </div>
                     </div>
                     <div class="swiper-slide">
                       <a
                         href="color-collection.html"
                         class="block bg-purple-600 text-white rounded-lg shadow-md p-6 text-center hover:bg-purple-700 transition"
-                        ><i class="fas fa-arrow-left mb-2 text-2xl"></i>
+                      >
+                        <i class="fas fa-arrow-left mb-2 text-2xl"></i>
                         <p>عرض جميع المجموعات</p>
                       </a>
                     </div>
@@ -730,6 +935,6 @@
         &copy; 2025 BONDMAXX. جميع الحقوق محفوظة. | تصميم وتطوير بواسطة فريق
         BONDMAXX التقني
       </div>
-    </footer>
+    </footer>
   </body>
 </html>
