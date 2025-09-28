@@ -9,8 +9,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/assets/main-BgsdFEpC.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-N1LZdXri.css">
+    <script type="module" crossorigin src="/assets/main-DRLt2USW.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-C-6jaw29.css">
   </head>
 
   <body class="bg-gray-100 text-gray-800 font-sans">
@@ -46,6 +46,24 @@
 
         <!-- Left - Favorites + Language -->
         <div class="flex items-center gap-5">
+          <!-- Cart -->
+          <button
+            title="button"
+            type="button"
+            class="relative flex items-center gap-2 p-2 rounded-md hover:bg-emerald-100 hover:text-emerald-700 transition"
+            onclick="toggleCart()"
+          >
+            <i class="fas fa-shopping-cart"></i>
+            <span class="hidden md:inline">السلة</span>
+
+            <!-- badge -->
+            <span
+              id="cartCount"
+              class="absolute -top-1 -right-1 text-[10px] leading-none px-1.5 py-1 rounded-full bg-red-500 text-white"
+              >0</span
+            >
+          </button>
+
           <!-- Favorites -->
           <button
             title="button"
@@ -244,6 +262,63 @@
       onclick="closeFavorites()"
     ></div>
 
+    <!-- Cart Sidebar -->
+    <div
+      class="fixed top-0 left-0 h-full w-96 bg-gradient-to-br from-white to-emerald-50 z-50 shadow-xl overflow-y-auto transform -translate-x-full transition-transform duration-300 hidden"
+      id="cartSidebar"
+    >
+      <div
+        class="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white p-6 border-b-2 border-emerald-200"
+      >
+        <div class="flex items-center gap-3 text-xl font-semibold">
+          <i class="fas fa-shopping-cart"></i>
+          <span>سلة المشتريات</span>
+        </div>
+        <button
+          title="button"
+          type="button"
+          class="absolute top-6 left-6 p-2 rounded-md bg-white/20 hover:bg-white/30 transition text-white"
+          onclick="closeCart()"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="py-6">
+        <div id="cartContent" class="space-y-3 px-4">
+          <div style="text-align: center; color: #6b7280; padding: 28px 16px">
+            <i
+              class="fas fa-shopping-basket"
+              style="font-size: 2.25rem; color: #86efac; margin-bottom: 10px"
+            ></i>
+            <h3 style="color: #374151; margin-bottom: 6px">السلة فارغة</h3>
+            <p>أضف المنتجات إلى السلة للمتابعة</p>
+          </div>
+        </div>
+
+        <div class="border-t mt-4 p-4 bg-white">
+          <div class="flex items-center justify-between text-gray-800 mb-3">
+            <span>الإجمالي:</span>
+            <span id="cartTotal" class="font-semibold">0</span>
+          </div>
+          <button
+            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-lg transition font-medium"
+            type="button"
+            onclick="submitCartToWhatsApp()"
+          >
+            إتمام الشراء
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div
+      class="fixed inset-0 z-40 hidden bg-black/50"
+      id="cartOverlay"
+      onclick="closeCart()"
+    ></div>
+
     <!-- Main -->
     <main class="mt-[70px]">
       <!-- Hero Section -->
@@ -278,7 +353,6 @@
         </section>
         <div class="max-w-[1400px] mx-auto px-6">
           <!-- Products Sliders -->
-          <!-- Products Sliders -->
           <section class="py-16 bg-white">
             <div class="max-w-7xl mx-auto px-6 space-y-16">
               <!-- Interior Colors -->
@@ -294,15 +368,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('interior-1', 'أزرق داخلي فاتح', 'دهانات داخلية', '#BFDBFE')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="interior-1"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('interior-1', 'أزرق داخلي فاتح', 'دهانات داخلية', '#BFDBFE')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="interior-1"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('interior-1','أزرق داخلي فاتح', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">أزرق داخلي فاتح</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -314,15 +403,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('interior-2', 'أزرق داخلي متوسط', 'دهانات داخلية', '#93C5FD')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="interior-2"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('interior-2', 'أزرق داخلي متوسط', 'دهانات داخلية', '#93C5FD')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="interior-2"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('interior-2','أزرق داخلي متوسط', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">أزرق داخلي متوسط</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -334,15 +438,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('interior-3', 'أزرق داخلي غامق', 'دهانات داخلية', '#60A5FA')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="interior-3"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('interior-3', 'أزرق داخلي غامق', 'دهانات داخلية', '#60A5FA')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="interior-3"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('interior-3','أزرق داخلي غامق', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">أزرق داخلي غامق</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -354,15 +473,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('interior-4', 'أزرق داخلي عميق', 'دهانات داخلية', '#3B82F6')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="interior-4"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('interior-4', 'أزرق داخلي عميق', 'دهانات داخلية', '#3B82F6')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="interior-4"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('interior-4','أزرق داخلي عميق', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">أزرق داخلي عميق</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -411,15 +545,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('exterior-1', 'أخضر خارجي فاتح', 'دهانات خارجية', '#BBF7D0')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="exterior-1"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('exterior-1', 'أخضر خارجي فاتح', 'دهانات خارجية', '#BBF7D0')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="exterior-1"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('exterior-1','أخضر خارجي فاتح', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">أخضر خارجي فاتح</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -431,15 +580,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('exterior-2', 'أخضر خارجي متوسط', 'دهانات خارجية', '#86EFAC')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="exterior-2"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('exterior-2', 'أخضر خارجي متوسط', 'دهانات خارجية', '#86EFAC')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="exterior-2"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('exterior-2','أخضر خارجي متوسط', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">أخضر خارجي متوسط</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -451,15 +615,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('exterior-3', 'أخضر خارجي غامق', 'دهانات خارجية', '#4ADE80')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="exterior-3"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('exterior-3', 'أخضر خارجي غامق', 'دهانات خارجية', '#4ADE80')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="exterior-3"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('exterior-3','أخضر خارجي غامق', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">أخضر خارجي غامق</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -471,15 +650,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('exterior-4', 'أخضر خارجي عميق', 'دهانات خارجية', '#22C55E')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="exterior-4"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('exterior-4', 'أخضر خارجي عميق', 'دهانات خارجية', '#22C55E')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="exterior-4"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('exterior-4','أخضر خارجي عميق', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">أخضر خارجي عميق</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -526,15 +720,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('insulation-1', 'عازل حراري ذهبي', 'عوازل', '#FDE68A')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="insulation-1"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('insulation-1', 'عازل حراري ذهبي', 'عوازل', '#FDE68A')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="insulation-1"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('insulation-1','عازل حراري ذهبي', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">عازل حراري ذهبي</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -546,15 +755,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('insulation-2', 'عازل مائي أصفر', 'عوازل', '#FCD34D')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="insulation-2"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('insulation-2', 'عازل مائي أصفر', 'عوازل', '#FCD34D')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="insulation-2"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('insulation-2','عازل مائي أصفر', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">عازل مائي أصفر</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -566,15 +790,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('insulation-3', 'عازل صوتي برتقالي', 'عوازل', '#FBBF24')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="insulation-3"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('insulation-3', 'عازل صوتي برتقالي', 'عوازل', '#FBBF24')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="insulation-3"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('insulation-3','عازل صوتي برتقالي', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">عازل صوتي برتقالي</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -586,15 +825,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('insulation-4', 'عازل متعدد الأغراض', 'عوازل', '#F59E0B')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="insulation-4"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('insulation-4', 'عازل متعدد الأغراض', 'عوازل', '#F59E0B')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="insulation-4"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('insulation-4','عازل متعدد الأغراض', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">عازل متعدد الأغراض</h3>
                         <div
                           class="w-full h-32 rounded"
@@ -643,37 +897,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('collection-1', 'مجموعة البنفسجي الفاتح', 'مجموعة الألوان', '#DDD6FE')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="collection-1"
-                          ></i>
-                        </button>
-                        <h3 class="font-semibold mb-2">
-                          مجموعة البنفسجي الفاتح
-                        </h3>
-                        <div
-                          class="w-full h-32 rounded"
-                          style="background-color: #ddd6fe"
-                        ></div>
-                      </div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div
-                        class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
-                      >
-                        <button
-                          onclick="toggleSliderFavorite('collection-2', 'مجموعة البنفسجي المتوسط', 'مجموعة الألوان', '#C4B5FD')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="collection-2"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('collection-1', 'مجموعة البنفسجي الفاتح', 'مجموعة الألوان', '#DDD6FE')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="collection-1"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('collection-2','مجموعة البنفسجي المتوسط', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">
                           مجموعة البنفسجي المتوسط
                         </h3>
@@ -687,15 +934,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('collection-3', 'مجموعة البنفسجي الغامق', 'مجموعة الألوان', '#A78BFA')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="collection-3"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('collection-3', 'مجموعة البنفسجي الغامق', 'مجموعة الألوان', '#A78BFA')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="collection-3"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('collection-3','مجموعة البنفسجي الغامق', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">
                           مجموعة البنفسجي الغامق
                         </h3>
@@ -709,15 +971,30 @@
                       <div
                         class="bg-gray-100 rounded-lg shadow-md p-6 text-center relative group"
                       >
-                        <button
-                          onclick="toggleSliderFavorite('collection-4', 'مجموعة البنفسجي العميق', 'مجموعة الألوان', '#8B5CF6')"
-                          class="absolute top-3 left-2 z-10 p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
-                        >
-                          <i
-                            class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
-                            data-fav-id="collection-4"
-                          ></i>
-                        </button>
+                        <div class="absolute top-3 left-2 z-10 flex gap-2">
+                          <!-- ❤️ favorite -->
+                          <button
+                            onclick="toggleSliderFavorite('collection-4', 'مجموعة البنفسجي العميق', 'مجموعة الألوان', '#8B5CF6')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="إضافة إلى المفضلة"
+                          >
+                            <i
+                              class="far fa-heart text-gray-400 hover:text-red-500 transition-colors"
+                              data-fav-id="collection-4"
+                            ></i>
+                          </button>
+                          <!-- 🛒 add to cart -->
+                          <button
+                            onclick="addToCart('collection-4','مجموعة البنفسجي العميق', 0, '')"
+                            class="p-1 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
+                            aria-label="أضف إلى السلة"
+                            title="أضف إلى السلة"
+                          >
+                            <i
+                              class="fas fa-shopping-cart text-gray-500 hover:text-emerald-600 transition-colors"
+                            ></i>
+                          </button>
+                        </div>
                         <h3 class="font-semibold mb-2">
                           مجموعة البنفسجي العميق
                         </h3>
