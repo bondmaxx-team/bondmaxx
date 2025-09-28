@@ -8,6 +8,30 @@ let favorites = JSON.parse(localStorage.getItem("bondmaxx-favorites") || "[]");
 let currentLanguage = "ar";
 let colorFamilies = [];
 
+// Initialize favorites container on page load
+function initializeFavoritesContainer() {
+  const container = document.getElementById("favoritesContent");
+  if (!container) return;
+
+  // Check if container is empty or only has the default "no favorites" message
+  if (container.children.length === 0) {
+    showEmptyFavoritesMessage();
+  } else {
+    // Check if the only content is the empty message
+    const hasOnlyEmptyMessage =
+      container.children.length === 1 &&
+      (container.firstElementChild.textContent.includes(
+        "لا توجد ألوان مفضلة"
+      ) ||
+        container.firstElementChild.innerHTML.includes("fa-heart"));
+
+    if (hasOnlyEmptyMessage) {
+      // Keep the empty message as is
+      container.firstElementChild.setAttribute("data-empty-message", "true");
+    }
+  }
+}
+
 // Initialize color families data
 function initializeColorFamilies() {
   colorFamilies = [
@@ -386,6 +410,9 @@ function initializeColorFamilies() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Initialize favorites container
+  initializeFavoritesContainer();
+
   // Sidebar
   const sidebar = document.getElementById("sidebar");
   const sidebarOverlay = document.getElementById("sidebarOverlay");
@@ -438,10 +465,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (allColorsPage) allColorsPage.classList.remove("hidden");
   };
 
-  // Favorites
+  // Original Favorites function (for other parts of the site)
   window.toggleFavorite = function (id, img, name) {
     const container = document.getElementById("favoritesContent");
-    if (!container) return; // Exit if favorites container doesn't exist
+    if (!container) return;
 
     let existing = document.getElementById(id);
     if (existing) {
@@ -451,7 +478,7 @@ document.addEventListener("DOMContentLoaded", function () {
       item.id = id;
       item.className = "flex items-center gap-3 p-2 border rounded";
       item.innerHTML = `
-                <img alt=""  src="${img}" class="w-12 h-12 object-cover rounded-md border">
+                <img alt="" src="${img}" class="w-12 h-12 object-cover rounded-md border">
                 <span>${name}</span>
             `;
       container.appendChild(item);
@@ -474,7 +501,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Search Colors
   window.filterColors = function () {
     const input = document.getElementById("colorSearch");
-    if (!input) return; // Exit if search input doesn't exist
+    if (!input) return;
 
     let inputValue = input.value.toLowerCase();
     let cards = document.querySelectorAll(".color-card");
@@ -484,7 +511,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
 
-  // Carousels Data
+  // Initialize sliders with favorites
+  initSwiperWithFavorites();
+
+  // Original carousel code (for other parts of site)
   const carouselsData = [
     {
       title: "دهانات داخلية",
@@ -540,43 +570,229 @@ document.addEventListener("DOMContentLoaded", function () {
   const template = document.getElementById("carousel-template");
 
   // Only run carousel code if elements exist (on index.html)
-  if (!container || !template) {
-    return;
-  }
+  if (container && template) {
+    carouselsData.forEach((c) => {
+      const clone = template.content.cloneNode(true);
+      clone.querySelector(".carousel-title").textContent = c.title;
+      clone.querySelector(".carousel-link").setAttribute("href", c.link);
+      const track = clone.querySelector(".carousel-track");
 
-  carouselsData.forEach((c) => {
-    const clone = template.content.cloneNode(true);
-    clone.querySelector(".carousel-title").textContent = c.title;
-    clone.querySelector(".carousel-link").setAttribute("href", c.link);
-    const track = clone.querySelector(".carousel-track");
-
-    c.products.forEach((p) => {
-      const prodDiv = document.createElement("div");
-      prodDiv.className =
-        "min-w-[220px] bg-white rounded-xl shadow p-4 text-center relative group hover:shadow-lg transition filter hover:blur-none";
-      prodDiv.innerHTML = `
-                <img alt=""  src="${p.img}" class="w-full h-48 object-cover rounded-md mb-2">
+      c.products.forEach((p) => {
+        const prodDiv = document.createElement("div");
+        prodDiv.className =
+          "min-w-[220px] bg-white rounded-xl shadow p-4 text-center relative group hover:shadow-lg transition filter hover:blur-none";
+        prodDiv.innerHTML = `
+                <img alt="" src="${p.img}" class="w-full h-48 object-cover rounded-md mb-2">
                 <p class="text-gray-800 font-medium">${p.name}</p>
                 <button title="button" type="button" onclick="toggleFavorite('${p.name}','${p.img}','${p.name}')" class="absolute top-2 right-2 text-red-500 hover:text-red-700 text-xl">
                     <i class="fas fa-heart"></i>
                 </button>
             `;
-      track.appendChild(prodDiv);
-    });
+        track.appendChild(prodDiv);
+      });
 
-    const prevBtn = clone.querySelector(".prev-btn");
-    const nextBtn = clone.querySelector(".next-btn");
-    prevBtn.addEventListener("click", () => {
-      track.scrollBy({ left: -240, behavior: "smooth" });
-    });
-    nextBtn.addEventListener("click", () => {
-      track.scrollBy({ left: 240, behavior: "smooth" });
-    });
+      const prevBtn = clone.querySelector(".prev-btn");
+      const nextBtn = clone.querySelector(".next-btn");
+      prevBtn.addEventListener("click", () => {
+        track.scrollBy({ left: -240, behavior: "smooth" });
+      });
+      nextBtn.addEventListener("click", () => {
+        track.scrollBy({ left: 240, behavior: "smooth" });
+      });
 
-    container.appendChild(clone);
-  });
+      container.appendChild(clone);
+    });
+  }
 });
 
+// Initialize Swiper sliders with favorites functionality
+function initSwiperWithFavorites() {
+  // Interior Colors Swiper
+  const interiorSwiper = new Swiper(".interior-swiper", {
+    slidesPerView: 1,
+    spaceBetween: 16,
+    loop: false,
+    pagination: {
+      el: ".interior-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".interior-next",
+      prevEl: ".interior-prev",
+    },
+    breakpoints: {
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+
+  // Exterior Colors Swiper
+  const exteriorSwiper = new Swiper(".exterior-swiper", {
+    slidesPerView: 1,
+    spaceBetween: 16,
+    loop: false,
+    pagination: {
+      el: ".exterior-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".exterior-next",
+      prevEl: ".exterior-prev",
+    },
+    breakpoints: {
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+
+  // Insulation Swiper
+  const insulationSwiper = new Swiper(".insulation-swiper", {
+    slidesPerView: 1,
+    spaceBetween: 16,
+    loop: false,
+    pagination: {
+      el: ".insulation-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".insulation-next",
+      prevEl: ".insulation-prev",
+    },
+    breakpoints: {
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+
+  // Collection Swiper
+  const collectionSwiper = new Swiper(".collection-swiper", {
+    slidesPerView: 1,
+    spaceBetween: 16,
+    loop: false,
+    pagination: {
+      el: ".collection-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".collection-next",
+      prevEl: ".collection-prev",
+    },
+    breakpoints: {
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+}
+
+// Enhanced favorite toggle function for sliders with visual feedback
+window.toggleSliderFavorite = function (id, name, type, color) {
+  const heartIcon = document.querySelector(`[data-fav-id="${id}"]`);
+
+  if (!heartIcon) return;
+
+  // Check if item is currently favorited
+  const isFavorited = heartIcon.classList.contains("text-red-500");
+
+  if (isFavorited) {
+    // Remove from favorites
+    heartIcon.classList.remove("text-red-500", "fas");
+    heartIcon.classList.add("text-gray-400", "far");
+    removeFavoriteItem(id);
+  } else {
+    // Add to favorites
+    heartIcon.classList.remove("text-gray-400", "far");
+    heartIcon.classList.add("text-red-500", "fas");
+    addFavoriteItem(id, name, type, color);
+  }
+
+  // Add a small animation effect
+  heartIcon.style.transform = "scale(1.3)";
+  setTimeout(() => {
+    heartIcon.style.transform = "scale(1)";
+  }, 150);
+};
+
+function addFavoriteItem(id, name, type, color) {
+  const container = document.getElementById("favoritesContent");
+  if (!container) return;
+
+  // Remove "no favorites" message if it exists (check for multiple possible selectors)
+  const emptyMessage = container.querySelector("[data-empty-message]");
+  if (emptyMessage) {
+    emptyMessage.remove();
+  }
+
+  // Also remove any existing empty state content by checking for the specific text
+  const existingContent = container.children;
+  for (let i = existingContent.length - 1; i >= 0; i--) {
+    const element = existingContent[i];
+    if (
+      element.textContent.includes("لا توجد ألوان مفضلة") ||
+      (element.innerHTML.includes("fa-heart") &&
+        element.textContent.includes("لا توجد"))
+    ) {
+      element.remove();
+    }
+  }
+
+  // Check if item already exists to avoid duplicates
+  const existingItem = document.getElementById(`fav-${id}`);
+  if (existingItem) {
+    return; // Item already in favorites
+  }
+
+  // Create favorite item
+  const item = document.createElement("div");
+  item.id = `fav-${id}`;
+  item.className =
+    "flex items-center gap-3 p-4 border rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow";
+  item.innerHTML = `
+    <div class="w-12 h-12 rounded-lg border-2 border-gray-200" style="background-color: ${color}"></div>
+    <div class="flex-1">
+      <h4 class="font-semibold text-gray-800">${name}</h4>
+      <p class="text-sm text-gray-500">${type}</p>
+    </div>
+    <button onclick="toggleSliderFavorite('${id}', '${name}', '${type}', '${color}')" 
+            class="p-2 text-red-500 hover:text-red-700 transition-colors"
+            title="إزالة من المفضلة">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+  `;
+  container.appendChild(item);
+
+  console.log("Added item to favorites:", name); // Debug log
+}
+
+function removeFavoriteItem(id) {
+  const item = document.getElementById(`fav-${id}`);
+  if (item) {
+    item.remove();
+  }
+
+  // Check if favorites container is empty
+  const container = document.getElementById("favoritesContent");
+  if (container && container.children.length === 0) {
+    showEmptyFavoritesMessage();
+  }
+}
+
+function showEmptyFavoritesMessage() {
+  const container = document.getElementById("favoritesContent");
+  if (!container) return;
+
+  const emptyMessage = document.createElement("div");
+  emptyMessage.setAttribute("data-empty-message", "true");
+  emptyMessage.style.cssText =
+    "text-align: center; color: #6b7280; padding: 48px 28px";
+  emptyMessage.innerHTML = `
+    <i class="fas fa-heart" style="font-size: 3rem; color: #fca5a5; margin-bottom: 16px"></i>
+    <h3 style="color: #374151; margin-bottom: 8px">لا توجد ألوان مفضلة</h3>
+    <p>ابدأ بإضافة الألوان التي تعجبك إلى قائمة المفضلة</p>
+  `;
+  container.appendChild(emptyMessage);
+}
+
+// Legacy functions for old initSwiper
 function initSwiper(className) {
   return new Swiper(`.${className}-swiper`, {
     slidesPerView: 1,
@@ -596,10 +812,3 @@ function initSwiper(className) {
     },
   });
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  initSwiper("interior");
-  initSwiper("exterior");
-  initSwiper("insulation");
-  initSwiper("collection");
-});

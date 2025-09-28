@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Custom utilities for specific needs */
 .no-scrollbar {
@@ -41,4 +41,9 @@
 /* Ensure sidebar always hides to the right regardless of RTL */
 #sidebar.translate-x-full {
   transform: translateX(100%) !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  z-index: 20;
 }
