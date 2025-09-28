@@ -52,7 +52,7 @@
 
 `,t=0;ae.forEach((n,d)=>{if(a+=`${d+1}. ${n.name}
 `,n.price&&n.price>0&&(a+=`   السعر: ${n.price} ₺
-`,t+=Number(n.price)),n.img||n.image||n.imageUrl){const f=n.img||n.image||n.imageUrl,r=f.startsWith("http")?f:window.location.origin+f;a+=`   الصورة: ${r}
+`,t+=Number(n.price)),n.img||n.image||n.imageUrl){const f=n.img||n.image||n.imageUrl,r=f.startsWith("http")?f:window.location.origin+"/"+f;a+=`   الصورة: ${r}
 `}a+=`
 `}),t>0&&(a+=`الإجمالي: ${t} ₺
 
