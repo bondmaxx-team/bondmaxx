@@ -5,8 +5,15 @@ import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 
 let favorites = JSON.parse(localStorage.getItem("bondmaxx-favorites") || "[]");
+// cart state
+let cart = JSON.parse(localStorage.getItem("bondmaxx-cart") || "[]");
 let currentLanguage = "ar";
 let colorFamilies = [];
+
+function updateCartCount() {
+  const el = document.getElementById("cartCount");
+  if (el) el.textContent = String(cart.length || 0);
+}
 
 // Initialize favorites container on page load
 function initializeFavoritesContainer() {
@@ -412,6 +419,7 @@ function initializeColorFamilies() {
 document.addEventListener("DOMContentLoaded", function () {
   // Initialize favorites container
   initializeFavoritesContainer();
+  updateCartCount();
 
   // Sidebar
   const sidebar = document.getElementById("sidebar");
@@ -812,3 +820,138 @@ function initSwiper(className) {
     },
   });
 }
+
+function renderCart() {
+  const container = document.getElementById("cartContent");
+  const totalEl = document.getElementById("cartTotal");
+  if (!container) return;
+
+  if (!cart.length) {
+    container.innerHTML = `
+      <div style="text-align:center; color:#6b7280; padding: 28px 16px">
+        <i class="fas fa-shopping-basket" style="font-size:2.25rem; color:#86efac; margin-bottom: 10px"></i>
+        <h3 style="color:#374151; margin-bottom:6px">السلة فارغة</h3>
+        <p>أضف المنتجات إلى السلة للمتابعة</p>
+      </div>
+    `;
+    if (totalEl) totalEl.textContent = "0";
+    return;
+  }
+
+  container.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, idx) => {
+    total += Number(item.price || 0);
+    const row = document.createElement("div");
+    row.className =
+      "flex items-center justify-between gap-3 p-2 border rounded bg-white";
+    row.innerHTML = `
+      <div class="flex items-center gap-3">
+        <img alt="" src="${
+          item.img || ""
+        }" class="w-12 h-12 object-cover rounded-md border" />
+        <div>
+          <div class="font-medium">${item.name || "منتج"}</div>
+          <div class="text-sm text-gray-500">${
+            item.price ? item.price + " ₺" : ""
+          }</div>
+        </div>
+      </div>
+      <button
+        title="remove"
+        type="button"
+        class="text-red-600 hover:text-red-700"
+        onclick="removeFromCart(${idx})"
+      >
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    `;
+    container.appendChild(row);
+  });
+
+  if (totalEl) totalEl.textContent = total + " ₺";
+}
+
+window.toggleCart = function () {
+  const cartSidebar = document.getElementById("cartSidebar");
+  const cartOverlay = document.getElementById("cartOverlay");
+  if (!cartSidebar) return;
+  cartSidebar.classList.remove("hidden");
+  cartSidebar.classList.toggle("-translate-x-full");
+  if (cartOverlay) cartOverlay.classList.remove("hidden");
+  renderCart();
+};
+
+window.closeCart = function () {
+  const cartSidebar = document.getElementById("cartSidebar");
+  const cartOverlay = document.getElementById("cartOverlay");
+  if (!cartSidebar) return;
+  cartSidebar.classList.add("-translate-x-full");
+  if (cartOverlay) cartOverlay.classList.add("hidden");
+  setTimeout(() => {
+    if (cartSidebar.classList.contains("-translate-x-full")) {
+      cartSidebar.classList.add("hidden");
+    }
+  }, 50);
+};
+
+// public helpers to use from product cards later
+window.addToCart = function (id, name, price = 0, img = "") {
+  cart.push({ id, name, price, img });
+  localStorage.setItem("bondmaxx-cart", JSON.stringify(cart));
+  updateCartCount();
+  renderCart();
+};
+
+window.removeFromCart = function (index) {
+  cart.splice(index, 1);
+  localStorage.setItem("bondmaxx-cart", JSON.stringify(cart));
+  updateCartCount();
+  renderCart();
+};
+
+// WhatsApp checkout function
+window.submitCartToWhatsApp = function () {
+  if (!cart.length) {
+    alert("السلة فارغة! يرجى إضافة منتجات قبل المتابعة");
+    return;
+  }
+
+  // Phone number (with country code, no + sign for WhatsApp URL)
+  const phoneNumber = "4917666990043";
+
+  // Create message with cart items
+  let message = "مرحباً! أود طلب المنتجات التالية:\n\n";
+
+  let total = 0;
+  cart.forEach((item, index) => {
+    message += `${index + 1}. ${item.name}\n`;
+    if (item.price && item.price > 0) {
+      message += `   السعر: ${item.price} ₺\n`;
+      total += Number(item.price);
+    }
+    message += "\n";
+  });
+
+  if (total > 0) {
+    message += `الإجمالي: ${total} ₺\n\n`;
+  }
+
+  message += "شكراً لكم!";
+
+  // Encode the message for URL
+  const encodedMessage = encodeURIComponent(message);
+
+  // Create WhatsApp URL
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+  // Open WhatsApp
+  window.open(whatsappUrl, "_blank");
+
+  cart = [];
+  localStorage.setItem("bondmaxx-cart", JSON.stringify(cart));
+  updateCartCount();
+  renderCart();
+  closeCart();
+};
