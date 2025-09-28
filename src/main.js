@@ -918,19 +918,28 @@ window.submitCartToWhatsApp = function () {
     return;
   }
 
-  // Phone number (with country code, no + sign for WhatsApp URL)
   const phoneNumber = "4917666990043";
-
-  // Create message with cart items
   let message = "مرحباً! أود طلب المنتجات التالية:\n\n";
-
   let total = 0;
+
   cart.forEach((item, index) => {
     message += `${index + 1}. ${item.name}\n`;
+
     if (item.price && item.price > 0) {
       message += `   السعر: ${item.price} ₺\n`;
       total += Number(item.price);
     }
+
+    // Add image URL if available
+    if (item.img || item.image || item.imageUrl) {
+      const imageUrl = item.img || item.image || item.imageUrl;
+      // Convert relative URLs to absolute URLs
+      const fullImageUrl = imageUrl.startsWith("http")
+        ? imageUrl
+        : window.location.origin + "/" + imageUrl;
+      message += `   الصورة: ${fullImageUrl}\n`;
+    }
+
     message += "\n";
   });
 
@@ -940,15 +949,12 @@ window.submitCartToWhatsApp = function () {
 
   message += "شكراً لكم!";
 
-  // Encode the message for URL
   const encodedMessage = encodeURIComponent(message);
-
-  // Create WhatsApp URL
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
-  // Open WhatsApp
   window.open(whatsappUrl, "_blank");
 
+  // Clear cart
   cart = [];
   localStorage.setItem("bondmaxx-cart", JSON.stringify(cart));
   updateCartCount();
