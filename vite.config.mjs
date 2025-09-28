@@ -16,6 +16,7 @@ export default defineConfig({
         insulation: "insulation.html",
         interiorColors: "interior-colors.html",
         paintingServices: "painting-services.html",
+        productDetails: "product-details.html",
       },
     },
   },
