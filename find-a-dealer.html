@@ -4,11 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BONDMAXX - البحث عن تاجر</title>
-
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Cairo", sans-serif;
+      }
+    </style>
   </head>
   <body class="bg-gray-100 text-gray-800 font-sans">
     <!-- Header -->
@@ -230,7 +238,7 @@
           <div style="text-align: center; color: #6b7280; padding: 48px 28px">
             <i
               class="fas fa-heart"
-              style="font-size: 3rem; color: #fca5a5; margin-bottom: 16px"
+              style="font-size: 3rem; color: #4785ba; margin-bottom: 16px"
             ></i>
             <h3 style="color: #374151; margin-bottom: 8px">
               لا توجد ألوان مفضلة
@@ -240,7 +248,143 @@
         </div>
       </div>
     </div>
-    <!-- whatsapp button-->
+
+    <!-- Hero Section -->
+    <section
+      class="bg-[url('/img/1.jpeg')] bg-cover bg-center h-screen w-full flex items-center justify-center relative overflow-hidden"
+    >
+      <div class="container mx-auto px-4 text-center relative z-10">
+        <!-- Main Content -->
+        <div class="max-w-2xl mx-auto">
+          <h1
+            class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight"
+          >
+            اعثر على متجر
+          </h1>
+          <p class="text-lg md:text-xl text-gray-600 mb-12">
+            اعثر على أقرب موزع لمنتجاتك
+          </p>
+
+          <!-- Search Section -->
+          <div
+            class="bg-white rounded-2xl shadow-2xl p-8 backdrop-blur-sm bg-opacity-95"
+          >
+            <div class="flex flex-col md:flex-row gap-4">
+              <!-- Location Button -->
+              <button
+                id="locationBtn"
+                class="flex items-center justify-center gap-3 bg-blue-500 hover:bg-blue-600 text-white px-6 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 min-w-fit"
+              >
+                <i class="fas fa-location-dot"></i>
+                <span>استخدم بياناتي الموقعي</span>
+              </button>
+
+              <!-- Search Input -->
+              <div class="relative flex-1 flex items-center">
+                <!-- زر البحث على اليسار -->
+                <button
+                  id="searchBtn"
+                  class="absolute left-2 flex items-center justify-center bg-gray-100 hover:bg-gray-200 p-3 rounded-lg transition-colors"
+                >
+                  <i class="fas fa-search text-gray-600"></i>
+                </button>
+
+                <!-- حقل البحث -->
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="أدخل اسم المدينة"
+                  class="w-full px-12 py-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right placeholder-gray-400"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Loading Modal -->
+    <div
+      id="loadingModal"
+      class="fixed inset-0 flex items-center justify-center z-50 hidden"
+      style="
+        background-image: url('https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+        background-size: cover;
+        background-position: center;
+      "
+    >
+      <!-- Overlay -->
+      <div
+        class="absolute inset-0 bg-blue-900 bg-opacity-85 backdrop-blur-sm"
+      ></div>
+
+      <!-- Modal Content -->
+      <div
+        class="relative z-10 bg-white rounded-3xl p-12 text-center shadow-2xl max-w-sm mx-4 transform transition-all duration-300"
+      >
+        <!-- Animated Logo -->
+        <div class="relative mb-8">
+          <div class="w-20 h-20 mx-auto relative">
+            <!-- Outer rotating ring -->
+            <div
+              class="absolute inset-0 rounded-full border-4 border-blue-200 animate-spin border-t-blue-500"
+            ></div>
+            <!-- Inner pulsing circle -->
+            <div
+              class="absolute inset-2 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full animate-pulse flex items-center justify-center"
+            >
+              <i class="fas fa-map-marker-alt text-white text-2xl"></i>
+            </div>
+          </div>
+          <!-- Floating dots animation -->
+          <div
+            class="absolute -top-2 -right-2 w-3 h-3 bg-blue-400 rounded-full animate-bounce"
+            style="animation-delay: 0.1s"
+          ></div>
+          <div
+            class="absolute -bottom-2 -left-2 w-2 h-2 bg-blue-300 rounded-full animate-bounce"
+            style="animation-delay: 0.3s"
+          ></div>
+          <div
+            class="absolute top-1/2 -left-4 w-2 h-2 bg-blue-500 rounded-full animate-bounce"
+            style="animation-delay: 0.5s"
+          ></div>
+        </div>
+
+        <!-- Loading Text -->
+        <h3 class="text-xl font-bold text-gray-800 mb-3">
+          جاري البحث عن المتاجر
+        </h3>
+        <p class="text-gray-500 mb-6 leading-relaxed">
+          نحن نبحث عن أقرب متاجر بوندماكس إليك...
+        </p>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-gray-200 rounded-full h-2 mb-4 overflow-hidden">
+          <div
+            class="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full animate-pulse"
+          ></div>
+        </div>
+
+        <!-- Loading dots -->
+        <div class="flex justify-center space-x-1 rtl:space-x-reverse">
+          <div
+            class="w-2 h-2 bg-blue-400 rounded-full animate-bounce"
+            style="animation-delay: 0s"
+          ></div>
+          <div
+            class="w-2 h-2 bg-blue-500 rounded-full animate-bounce"
+            style="animation-delay: 0.2s"
+          ></div>
+          <div
+            class="w-2 h-2 bg-blue-600 rounded-full animate-bounce"
+            style="animation-delay: 0.4s"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WhatsApp Button -->
     <a
       href="https://wa.me/00990555555555"
       target="_blank"
@@ -298,36 +442,41 @@
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-home"></i>الدهانات الداخلية</a
               >
+                <i class="fas fa-home"></i>الدهانات الداخلية
+              </a>
             </li>
             <li>
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-building"></i>الدهانات الخارجية</a
               >
+                <i class="fas fa-building"></i>الدهانات الخارجية
+              </a>
             </li>
             <li>
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-industry"></i>الدهانات الصناعية</a
               >
+                <i class="fas fa-industry"></i>الدهانات الصناعية
+              </a>
             </li>
             <li>
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-ship"></i>الدهانات البحرية</a
               >
+                <i class="fas fa-ship"></i>الدهانات البحرية
+              </a>
             </li>
             <li>
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-palette"></i>مجموعة الألوان</a
               >
+                <i class="fas fa-palette"></i>مجموعة الألوان
+              </a>
             </li>
           </ul>
         </div>
@@ -340,36 +489,41 @@
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-comments"></i>استشارة الألوان</a
               >
+                <i class="fas fa-comments"></i>استشارة الألوان
+              </a>
             </li>
             <li>
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-chalkboard-teacher"></i>التدريب التقني</a
               >
+                <i class="fas fa-chalkboard-teacher"></i>التدريب التقني
+              </a>
             </li>
             <li>
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-tools"></i>الدعم الفني</a
               >
+                <i class="fas fa-tools"></i>الدعم الفني
+              </a>
             </li>
             <li>
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-certificate"></i>ضمان الجودة</a
               >
+                <i class="fas fa-certificate"></i>ضمان الجودة
+              </a>
             </li>
             <li>
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-search"></i>البحث عن تاجر</a
               >
+                <i class="fas fa-search"></i>البحث عن تاجر
+              </a>
             </li>
           </ul>
         </div>
@@ -380,31 +534,35 @@
           <ul class="space-y-3">
             <li>
               <a
-                href="tel:+966111234567"
+                href="tel:+90555000400"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-phone"></i>+90 555 000 40 00</a
               >
+                <i class="fas fa-phone"></i>+90 555 000 40 00
+              </a>
             </li>
             <li>
               <a
                 href="mailto:info@bondmaxx.com"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-envelope"></i>info@bondmaxx.com</a
               >
+                <i class="fas fa-envelope"></i>info@bondmaxx.com
+              </a>
             </li>
             <li>
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-map-marker-alt"></i>سوريا ادلب</a
               >
+                <i class="fas fa-map-marker-alt"></i>سوريا ادلب
+              </a>
             </li>
             <li>
               <a
                 href="#"
                 class="flex items-center gap-2 text-gray-300 hover:text-white transition"
-                ><i class="fas fa-clock"></i>الأحد - الخميس: 8:00 ص - 6:00 م</a
               >
+                <i class="fas fa-clock"></i>الأحد - الخميس: 8:00 ص - 6:00 م
+              </a>
             </li>
           </ul>
         </div>
@@ -418,6 +576,7 @@
         BONDMAXX التقني
       </div>
     </footer>
-    <script type="module" src="/src/main.js"></script>
+
+    <script src="src/main.js" type="module"></script>
   </body>
 </html>

@@ -918,7 +918,7 @@ window.submitCartToWhatsApp = function () {
     return;
   }
 
-  const phoneNumber = "4917666990043";
+  const phoneNumber = "905528498828";
   let message = "مرحباً! أود طلب المنتجات التالية:\n\n";
   let total = 0;
 
@@ -960,4 +960,354 @@ window.submitCartToWhatsApp = function () {
   updateCartCount();
   renderCart();
   closeCart();
+};
+const locationBtn = document.getElementById("locationBtn");
+const searchBtn = document.getElementById("searchBtn");
+const searchInput = document.getElementById("searchInput");
+const loadingModal = document.getElementById("loadingModal");
+const menuBtn = document.getElementById("menuBtn");
+
+// Initialize when DOM is ready
+document.addEventListener("DOMContentLoaded", function () {
+  initializeEventListeners();
+});
+
+// Handle location detection
+function handleLocationRequest() {
+  if (!navigator.geolocation) {
+    showNotification("المتصفح لا يدعم خدمة تحديد الموقع", "error");
+    return;
+  }
+
+  showLoading();
+
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      hideLoading();
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      showNotification(`تم العثور على موقعك بنجاح`, "success");
+      console.log("Location found:", { lat, lng });
+
+      // Here you would typically redirect to results or call an API
+      setTimeout(() => {
+        alert(
+          `الإحداثيات: ${lat.toFixed(4)}, ${lng.toFixed(
+            4
+          )}\nسيتم توجيهك إلى أقرب متجر`
+        );
+      }, 1000);
+    },
+    function (error) {
+      hideLoading();
+      handleLocationError(error);
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 300000,
+    }
+  );
+}
+
+// Handle location errors
+function handleLocationError(error) {
+  let message = "عذراً، لم نتمكن من الحصول على موقعك.";
+
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      message =
+        "تم رفض طلب الحصول على الموقع. يرجى السماح بالوصول للموقع في إعدادات المتصفح.";
+      break;
+    case error.POSITION_UNAVAILABLE:
+      message = "معلومات الموقع غير متوفرة حالياً.";
+      break;
+    case error.TIMEOUT:
+      message = "انتهت مهلة طلب الحصول على الموقع.";
+      break;
+  }
+
+  showNotification(message, "error");
+}
+
+// Show loading modal with animation
+function showLoading() {
+  if (loadingModal) {
+    loadingModal.classList.remove("hidden");
+    loadingModal.classList.add("flex");
+
+    // Add entrance animation
+    const modalContent = loadingModal.querySelector(".bg-white");
+    if (modalContent) {
+      modalContent.style.transform = "scale(0.9) translateY(20px)";
+      modalContent.style.opacity = "0";
+
+      setTimeout(() => {
+        modalContent.style.transform = "scale(1) translateY(0)";
+        modalContent.style.opacity = "1";
+      }, 100);
+    }
+  }
+}
+
+// Hide loading modal with animation
+function hideLoading() {
+  if (loadingModal) {
+    const modalContent = loadingModal.querySelector(".bg-white");
+    if (modalContent) {
+      modalContent.style.transform = "scale(0.9) translateY(-20px)";
+      modalContent.style.opacity = "0";
+    }
+
+    setTimeout(() => {
+      loadingModal.classList.add("hidden");
+      loadingModal.classList.remove("flex");
+
+      // Reset transform for next time
+      if (modalContent) {
+        modalContent.style.transform = "";
+        modalContent.style.opacity = "";
+      }
+    }, 200);
+  }
+}
+
+// Show notification using Tailwind classes
+function showNotification(message, type = "info") {
+  // Remove any existing notifications
+  const existingNotification = document.querySelector(".notification-toast");
+  if (existingNotification) {
+    existingNotification.remove();
+  }
+
+  const notification = document.createElement("div");
+  notification.className =
+    "notification-toast fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full max-w-sm";
+
+  // Set notification style based on type using Tailwind classes
+  switch (type) {
+    case "success":
+      notification.classList.add("bg-green-500", "text-white");
+      break;
+    case "error":
+      notification.classList.add("bg-red-500", "text-white");
+      break;
+    case "warning":
+      notification.classList.add("bg-yellow-500", "text-white");
+      break;
+    default:
+      notification.classList.add("bg-blue-500", "text-white");
+  }
+
+  notification.innerHTML = `
+        <div class="flex items-center justify-between">
+            <span class="text-sm font-medium">${message}</span>
+            <button class="mr-4 text-white hover:text-gray-200 focus:outline-none" onclick="this.parentElement.parentElement.remove()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+
+  document.body.appendChild(notification);
+
+  // Animate in
+  setTimeout(() => {
+    notification.classList.remove("translate-x-full");
+  }, 100);
+
+  // Auto remove after 4 seconds
+  setTimeout(() => {
+    notification.classList.add("translate-x-full");
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.remove();
+      }
+    }, 300);
+  }, 4000);
+}
+
+// Add button click animations using Tailwind
+function addButtonAnimation(button) {
+  button.addEventListener("click", function (e) {
+    // Add pulse animation
+    this.classList.add("animate-pulse");
+
+    // Remove animation after a short delay
+    setTimeout(() => {
+      this.classList.remove("animate-pulse");
+    }, 300);
+  });
+}
+
+// Initialize button animations
+document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll("button");
+  buttons.forEach((button) => {
+    addButtonAnimation(button);
+
+    // Add hover effects using Tailwind
+    button.addEventListener("mouseenter", function () {
+      this.classList.add(
+        "transform",
+        "scale-105",
+        "transition-transform",
+        "duration-200"
+      );
+    });
+
+    button.addEventListener("mouseleave", function () {
+      this.classList.remove("transform", "scale-105");
+    });
+  });
+});
+
+// Utility function to validate input
+function validateSearchInput(input) {
+  const arabicPattern = /^[\u0600-\u06FF\s]+$/;
+  const englishPattern = /^[a-zA-Z\s]+$/;
+
+  return (
+    input &&
+    (arabicPattern.test(input) || englishPattern.test(input)) &&
+    input.length >= 2
+  );
+} // Main JavaScript file for Jotun Store Locator (Vanilla JS Version)
+// Load Swiper from CDN instead of import
+
+// Global variables
+favorites = JSON.parse(localStorage.getItem("jotun-favorites") || "[]");
+cart = JSON.parse(localStorage.getItem("jotun-cart") || "[]");
+currentLanguage = "ar";
+
+// Initialize the application
+document.addEventListener("DOMContentLoaded", function () {
+  initializeEventListeners();
+  updateCartCount();
+  initializeFavoritesContainer();
+
+  // Initialize Swiper if available
+  if (typeof Swiper !== "undefined") {
+    initSwiperWithFavorites();
+  }
+});
+
+// Event Listeners Setup
+function initializeEventListeners() {
+  if (locationBtn) {
+    locationBtn.addEventListener("click", handleLocationRequest);
+  }
+
+  if (searchBtn) {
+    searchBtn.addEventListener("click", handleSearch);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    });
+  }
+
+  if (menuBtn) {
+    menuBtn.addEventListener("click", handleMobileMenu);
+  }
+}
+
+// Search Handler
+function handleSearch() {
+  const query = searchInput ? searchInput.value.trim() : "";
+  if (query) {
+    showLoading();
+    setTimeout(() => {
+      hideLoading();
+      alert(`البحث عن متاجر في: ${query}\nسيتم توجيهك إلى صفحة النتائج.`);
+      // Here you would typically redirect to results page or call API
+      // redirectToStoreResults({ query });
+    }, 1500);
+  } else {
+    alert("يرجى إدخال اسم المدينة للبحث");
+  }
+}
+
+// Mobile Menu Handler
+function handleMobileMenu() {
+  alert("قائمة التنقل - سيتم فتح القائمة الجانبية");
+  // Here you would typically show/hide mobile menu
+  // toggleMobileMenu();
+}
+
+// Sidebar Management
+window.toggleSidebar = function () {
+  const sidebar = document.getElementById("sidebar");
+  const sidebarOverlay = document.getElementById("sidebarOverlay");
+  if (sidebar) sidebar.classList.toggle("translate-x-full");
+  if (sidebarOverlay) sidebarOverlay.classList.toggle("hidden");
+};
+
+window.closeSidebar = function () {
+  const sidebar = document.getElementById("sidebar");
+  const sidebarOverlay = document.getElementById("sidebarOverlay");
+  if (sidebar) sidebar.classList.add("translate-x-full");
+  if (sidebarOverlay) sidebarOverlay.classList.add("hidden");
+};
+
+// Favorites Management
+window.toggleFavorites = function () {
+  const favoritesSidebar = document.getElementById("favoritesSidebar");
+  const favoritesOverlay = document.getElementById("favoritesOverlay");
+  if (!favoritesSidebar) return;
+
+  favoritesSidebar.classList.remove("hidden");
+  favoritesSidebar.classList.toggle("-translate-x-full");
+  if (favoritesOverlay) {
+    favoritesOverlay.classList.remove("hidden");
+  }
+};
+
+window.closeFavorites = function () {
+  const favoritesSidebar = document.getElementById("favoritesSidebar");
+  const favoritesOverlay = document.getElementById("favoritesOverlay");
+  if (!favoritesSidebar) return;
+
+  favoritesSidebar.classList.add("-translate-x-full");
+  if (favoritesOverlay) {
+    favoritesOverlay.classList.add("hidden");
+  }
+
+  setTimeout(() => {
+    if (favoritesSidebar.classList.contains("-translate-x-full")) {
+      favoritesSidebar.classList.add("hidden");
+    }
+  }, 50);
+};
+
+// Language Menu
+window.toggleLanguageMenu = function () {
+  const languageMenu = document.getElementById("languageMenu");
+  if (languageMenu) languageMenu.classList.toggle("hidden");
+};
+
+window.selectLanguage = function (code, name, flag) {
+  const currentLanguage = document.getElementById("currentLanguage");
+  const currentFlag = document.getElementById("currentFlag");
+  if (currentLanguage) currentLanguage.innerText = name;
+  if (currentFlag) currentFlag.src = flag;
+
+  const languageMenu = document.getElementById("languageMenu");
+  if (languageMenu) languageMenu.classList.add("hidden");
+};
+
+// Search Colors
+window.filterColors = function () {
+  const input = document.getElementById("colorSearch");
+  if (!input) return;
+
+  let inputValue = input.value.toLowerCase();
+  let cards = document.querySelectorAll(".color-card");
+  cards.forEach((card) => {
+    let text = card.innerText.toLowerCase();
+    card.style.display = text.includes(inputValue) ? "block" : "none";
+  });
 };
