@@ -530,7 +530,6 @@ document.addEventListener("DOMContentLoaded", function () {
       products: [
         {
           name: "دهان أبيض داخلي",
-          img: "https://images.unsplash.com/photo-1590689962103-97f0b7f63c43?auto=format&fit=crop&w=220&q=80",
         },
       ],
     },
